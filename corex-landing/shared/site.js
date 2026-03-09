@@ -328,6 +328,95 @@
     });
   }
 
+  /* ── WebGL Shader (all pages) ────────────────────────── */
+  function startPageShader(canvas, hero) {
+    var THREE = window.THREE;
+    var scene    = new THREE.Scene();
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: false, antialias: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(new THREE.Color(0x000000), 1);
+    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, -1);
+
+    var uniforms = {
+      resolution: { value: [hero.offsetWidth, hero.offsetHeight] },
+      time:       { value: 0.0 },
+      xScale:     { value: 1.0 },
+      yScale:     { value: 0.42 },
+      distortion: { value: 0.07 },
+    };
+
+    var vert = [
+      'attribute vec3 position;',
+      'void main() { gl_Position = vec4(position, 1.0); }',
+    ].join('\n');
+
+    var frag = [
+      'precision highp float;',
+      'uniform vec2  resolution;',
+      'uniform float time;',
+      'uniform float xScale;',
+      'uniform float yScale;',
+      'uniform float distortion;',
+      'void main() {',
+      '  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);',
+      '  float d  = length(p) * distortion;',
+      '  float rx = p.x * (1.0 + d);',
+      '  float gx = p.x;',
+      '  float bx = p.x * (1.0 - d);',
+      '  float ri = 0.038 / abs(p.y + sin((rx + time) * xScale) * yScale);',
+      '  float gi = 0.038 / abs(p.y + sin((gx + time) * xScale) * yScale);',
+      '  float bi = 0.038 / abs(p.y + sin((bx + time) * xScale) * yScale);',
+      '  vec3 col = ri * vec3(0.000, 0.369, 0.718)',
+      '           + gi * vec3(0.725, 0.980, 0.973)',
+      '           + bi * vec3(0.200, 0.510, 0.800);',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '}',
+    ].join('\n');
+
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([
+      -1,-1,0, 1,-1,0, -1,1,0, 1,-1,0, -1,1,0, 1,1,0,
+    ]), 3));
+    var mat = new THREE.RawShaderMaterial({
+      vertexShader: vert, fragmentShader: frag,
+      uniforms: uniforms, side: THREE.DoubleSide,
+    });
+    scene.add(new THREE.Mesh(geo, mat));
+
+    function resize() {
+      var w = hero.offsetWidth, h = hero.offsetHeight;
+      renderer.setSize(w, h, false);
+      uniforms.resolution.value = [w, h];
+    }
+    resize();
+
+    function tick() {
+      uniforms.time.value += 0.007;
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+    window.addEventListener('resize', resize);
+  }
+
+  function initWebGLShader() {
+    var hero = document.querySelector('.hero, .page-hero');
+    if (!hero) return;
+    var canvas = document.createElement('canvas');
+    canvas.id = 'page-webgl';
+    canvas.setAttribute('aria-hidden', 'true');
+    hero.insertBefore(canvas, hero.firstChild);
+
+    if (window.THREE) {
+      startPageShader(canvas, hero);
+    } else {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+      script.onload = function () { startPageShader(canvas, hero); };
+      document.head.appendChild(script);
+    }
+  }
+
   /* ── Interactive Hover Buttons ────────────────────────── */
   const BTN_ARROW = '<svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const BTN_TARGETS = [
@@ -367,6 +456,7 @@
     initShootingStars();
     initCalendly();
     initInteractiveButtons();
+    initWebGLShader();
   });
 
 })();
