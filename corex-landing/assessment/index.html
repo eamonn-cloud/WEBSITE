@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Operations Assessment — COREX Operations</title>
+  <meta name="description" content="Take the free COREX Operations Assessment. 12 questions. Identify your operational maturity score and get a personalised action plan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/styles.css" />
+  <style>
+    /* ── Assessment App Shell ──────────────────────────── */
+    .assess-wrap {
+      min-height: 100vh;
+      padding: 100px 0 80px;
+      position: relative;
+    }
+    .assess-wrap .assess-bg {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: -2;
+    }
+    .assess-wrap .assess-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(185,250,248,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185,250,248,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 0%, transparent 100%);
+      z-index: -1;
+    }
+
+    /* ── Screen container ──────────────────────────────── */
+    .assess-screen {
+      display: none;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .assess-screen.active { display: block; }
+
+    /* ── Gate screen ────────────────────────────────────── */
+    .gate-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(185,250,248,0.25);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .gate-tag svg { width: 6px; height: 6px; flex-shrink: 0; }
+    .gate-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .gate-title .accent { color: var(--cyan); }
+    .gate-subtitle {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .gate-meta {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .gate-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--white-60);
+    }
+    .gate-meta-item span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(185,250,248,0.1);
+      font-size: 12px;
+    }
+
+    /* ── Forms ─────────────────────────────────────────── */
+    .assess-form { display: flex; flex-direction: column; gap: 18px; }
+    .assess-label {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-60);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .assess-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--bg-border-lg);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .assess-input::placeholder { color: var(--white-25); }
+    .assess-input:focus {
+      border-color: rgba(0,94,183,0.6);
+      box-shadow: 0 0 0 3px rgba(0,94,183,0.15);
+    }
+    .assess-input.error { border-color: rgba(248, 113, 113, 0.6); }
+
+    .btn-gate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: var(--blue);
+      border: 1px solid rgba(51,130,204,0.5);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.25s;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .btn-gate:hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 56px rgba(0,94,183,0.4);
+    }
+    .btn-gate svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .gate-note {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--white-35);
+      margin-top: 14px;
+    }
+
+    /* ── Quiz screen ────────────────────────────────────── */
+    .quiz-header {
+      margin-bottom: 32px;
+    }
+    .quiz-progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .quiz-section-name {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .quiz-progress-pct {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white-35);
+    }
+    .quiz-bar {
+      height: 3px;
+      background: var(--bg-border-lg);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .quiz-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 100px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .quiz-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .quiz-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bg-border);
+      transition: all 0.25s;
+    }
+    .quiz-dot.done { background: var(--blue); }
+    .quiz-dot.active { background: var(--cyan); width: 20px; border-radius: 3px; }
+
+    /* Question card */
+    .quiz-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--bg-border-lg);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 20px;
+      animation: cardIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .quiz-q-num {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      margin-bottom: 14px;
+    }
+    .quiz-q-text {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 28px;
+    }
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--bg-border-lg);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .quiz-option:hover {
+      background: rgba(0,94,183,0.08);
+      border-color: rgba(0,94,183,0.3);
+    }
+    .quiz-option.selected {
+      background: rgba(0,94,183,0.15);
+      border-color: rgba(0,94,183,0.6);
+    }
+    .quiz-option-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-border);
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quiz-option.selected .quiz-option-dot {
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+    .quiz-option.selected .quiz-option-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+    .quiz-option-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.5;
+    }
+    .quiz-option.selected .quiz-option-text { color: var(--white); }
+
+    .quiz-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 20px;
+      background: transparent;
+      border: 1px solid var(--bg-border);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white-60);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-back:hover { border-color: var(--bg-border-hover); color: var(--white); }
+    .btn-back svg { width: 14px; height: 14px; }
+    .btn-next {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--blue);
+      border: 1px solid rgba(51,130,204,0.5);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .btn-next.ready { opacity: 1; pointer-events: auto; }
+    .btn-next.ready:hover { background: var(--blue-hover); transform: translateY(-1px); }
+    .btn-next svg { width: 14px; height: 14px; }
+
+    /* ── Results screen ─────────────────────────────────── */
+    .results-score-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+    .results-score-ring {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue) calc(var(--pct) * 3.6deg), var(--bg-border-lg) 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .results-score-ring::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+    .results-score-num {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.1;
+    }
+    .results-score-num small {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--white-35);
+      letter-spacing: 0.06em;
+    }
+    .results-tier-info {}
+    .results-tier-label {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+    .results-tier-name {
+      font-family: var(--font-head);
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .results-tier-range {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--white-35);
+    }
+
+    .results-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      padding: 20px;
+      border: 1px solid var(--bg-border-lg);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .results-box {
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .results-box-title {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .results-box.risks {
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+    .results-box.risks .results-box-title { color: #f87171; }
+    .results-box.rec {
+      background: rgba(0, 94, 183, 0.1);
+      border: 1px solid rgba(0, 94, 183, 0.25);
+    }
+    .results-box.rec .results-box-title { color: var(--cyan); }
+    .risks-list { display: flex; flex-direction: column; gap: 8px; }
+    .risks-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.5;
+      list-style: none;
+    }
+    .risks-list li::before {
+      content: '⚠';
+      font-size: 12px;
+      color: #f87171;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .rec-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.7;
+    }
+
+    .results-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .btn-report {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: var(--blue);
+      border: 1px solid rgba(51,130,204,0.5);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.25s;
+      width: 100%;
+    }
+    .btn-report:hover { background: var(--blue-hover); transform: translateY(-2px); box-shadow: 0 20px 56px rgba(0,94,183,0.4); }
+    .btn-report.sent {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+      pointer-events: none;
+    }
+    .btn-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: transparent;
+      border: 1px solid var(--bg-border);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-60);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      width: 100%;
+      text-align: center;
+    }
+    .btn-call:hover { border-color: var(--bg-border-hover); color: var(--white); }
+    .btn-retake {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--white-35);
+      cursor: pointer;
+      margin-top: 6px;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+    .btn-retake:hover { color: var(--white-60); }
+
+    /* Report email form (inside results) */
+    .report-email-form {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--bg-border-lg);
+      border-radius: 10px;
+      animation: cardIn 0.25s ease;
+    }
+    .report-email-form.show { display: flex; }
+
+    @media (max-width: 600px) {
+      .assess-wrap { padding: 88px 0 60px; }
+      .quiz-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="assess-wrap">
+    <div class="assess-bg"></div>
+    <div class="assess-grid"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         SCREEN 1: LEAD GATE
+    ═══════════════════════════════════════════════════════ -->
+    <div class="assess-screen active" id="screen-gate">
+      <div class="gate-tag">
+        <svg viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3" fill="currentColor"/></svg>
+        Free · 12 Questions · ~5 Minutes
+      </div>
+      <h1 class="gate-title">
+        Discover your<br/>
+        <span class="accent">operations score.</span>
+      </h1>
+      <p class="gate-subtitle">
+        Answer 12 questions across five operational dimensions. Get an instant maturity score, your key risk areas, and a tailored recommendation — emailed to you in seconds.
+      </p>
+      <div class="gate-meta">
+        <div class="gate-meta-item"><span>📊</span> Maturity score out of 36</div>
+        <div class="gate-meta-item"><span>⚡</span> Instant results</div>
+        <div class="gate-meta-item"><span>🔒</span> No obligation</div>
+      </div>
+
+      <form class="assess-form" id="gate-form">
+        <div>
+          <label class="assess-label" for="g-name">Full Name</label>
+          <input class="assess-input" type="text" id="g-name" placeholder="Jane Smith" autocomplete="name" />
+        </div>
+        <div>
+          <label class="assess-label" for="g-email">Work Email</label>
+          <input class="assess-input" type="email" id="g-email" placeholder="jane@company.com" autocomplete="email" />
+        </div>
+        <div>
+          <label class="assess-label" for="g-mobile">Mobile Number</label>
+          <input class="assess-input" type="tel" id="g-mobile" placeholder="+44 7700 900000" autocomplete="tel" />
+        </div>
+        <button type="submit" class="btn-gate">
+          Start Assessment
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="gate-note">Your details are used to send your report. We never spam.</p>
+      </form>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         SCREEN 2: QUIZ
+    ═══════════════════════════════════════════════════════ -->
+    <div class="assess-screen" id="screen-quiz">
+      <div class="quiz-header">
+        <div class="quiz-progress-label">
+          <span class="quiz-section-name" id="quiz-section-name"></span>
+          <span class="quiz-progress-pct" id="quiz-pct"></span>
+        </div>
+        <div class="quiz-bar"><div class="quiz-bar-fill" id="quiz-bar-fill"></div></div>
+        <div class="quiz-dots" id="quiz-dots"></div>
+      </div>
+
+      <div class="quiz-card" id="quiz-card">
+        <div class="quiz-q-num" id="quiz-q-num"></div>
+        <div class="quiz-q-text" id="quiz-q-text"></div>
+        <div class="quiz-options" id="quiz-options"></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button class="btn-back" id="btn-back">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <button class="btn-next" id="btn-next">
+          Next
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         SCREEN 3: RESULTS
+    ═══════════════════════════════════════════════════════ -->
+    <div class="assess-screen" id="screen-results">
+      <div class="results-score-row">
+        <div class="results-score-ring" id="results-ring" style="--pct:0">
+          <div class="results-score-num" id="results-score-num">
+            0<small>/ 36</small>
+          </div>
+        </div>
+        <div class="results-tier-info">
+          <div class="results-tier-label">Operations Maturity</div>
+          <div class="results-tier-name" id="results-tier-name"></div>
+          <div class="results-tier-range" id="results-tier-range"></div>
+        </div>
+      </div>
+
+      <div class="results-desc" id="results-desc"></div>
+
+      <div class="results-box risks">
+        <div class="results-box-title">Key Risks Identified</div>
+        <ul class="risks-list" id="results-risks"></ul>
+      </div>
+
+      <div class="results-box rec">
+        <div class="results-box-title">Recommended Next Step</div>
+        <p class="rec-text" id="results-rec"></p>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn-report" id="btn-report">
+          Send My Report
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="report-email-form" id="report-email-form">
+          <label class="assess-label" for="r-email">Confirm your email</label>
+          <input class="assess-input" type="email" id="r-email" placeholder="jane@company.com" />
+          <button class="btn-gate" id="btn-send-report" type="button" style="margin-top:0;">
+            Send Report
+            <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <a class="btn-call" href="/corex-landing/contact/">Book a Discovery Call</a>
+        <button class="btn-retake" id="btn-retake">Start over</button>
+      </div>
+    </div>
+
+  </div><!-- /.assess-wrap -->
+
+  <div id="footer-placeholder"></div>
+  <script src="../shared/site.js"></script>
+  <script>
+  (function () {
+    /* ─── Data ─────────────────────────────────────────── */
+    const SECTIONS = [
+      'Data & Systems',
+      'Automation & Workflows',
+      'CRM & Customer Operations',
+      'AI Readiness',
+      'People & Process',
+    ];
+
+    const QUESTIONS = [
+      // Section 0 — Data & Systems
+      {
+        section: 0,
+        text: 'How do you currently manage your business data?',
+        options: [
+          'We use spreadsheets and email — there\'s no central system.',
+          'We have a basic CRM but it\'s inconsistently used and often out of date.',
+          'We have a CRM with mostly accurate data that the team generally follows.',
+          'We have a well-maintained CRM with automation, integrations, and reporting.',
+        ],
+      },
+      {
+        section: 0,
+        text: 'How visible is your pipeline or deal flow in real time?',
+        options: [
+          'No visibility — we rely on memory and team conversations.',
+          'We have a rough view but it\'s often outdated or incomplete.',
+          'We have a reasonable view of pipeline with some gaps.',
+          'Full, real-time pipeline visibility — always current and accurate.',
+        ],
+      },
+      // Section 1 — Automation & Workflows
+      {
+        section: 1,
+        text: 'How automated are your core operational processes?',
+        options: [
+          'Almost nothing is automated — everything is done manually.',
+          'A few things are automated, mostly ad hoc one-offs.',
+          'Several key workflows are automated and working well.',
+          'Most core workflows are automated with monitoring and fallback in place.',
+        ],
+      },
+      {
+        section: 1,
+        text: 'How do leads and new enquiries move through your business?',
+        options: [
+          'Ad hoc — whoever picks it up handles it in their own way.',
+          'We have a rough process but it\'s not consistently followed.',
+          'We have a defined process that the team mostly follows.',
+          'Structured, automated intake with routing, alerts, and tracking.',
+        ],
+      },
+      {
+        section: 1,
+        text: 'How do you handle client or customer onboarding?',
+        options: [
+          'Manually and inconsistently — every onboarding is different.',
+          'We have a checklist but it\'s not always followed or updated.',
+          'We have a repeatable process with some automation in place.',
+          'Fully systematised onboarding with automation, tracking, and QA.',
+        ],
+      },
+      // Section 2 — CRM & Customer Operations
+      {
+        section: 2,
+        text: 'How well do you manage client relationships and renewals?',
+        options: [
+          'We\'re reactive — we don\'t actively track relationship health.',
+          'We track some clients but things get missed, especially at renewal.',
+          'We have a system for most accounts but it\'s not consistent.',
+          'Proactive account management with automated health scoring and triggers.',
+        ],
+      },
+      {
+        section: 2,
+        text: 'How do you track and invoice for work delivered?',
+        options: [
+          'Manually — we often miss or delay invoices.',
+          'We have a process but there are regular gaps or delays.',
+          'We track most work and invoice on time with occasional issues.',
+          'Automated time tracking, invoicing, and reconciliation — nothing slips.',
+        ],
+      },
+      // Section 3 — AI Readiness
+      {
+        section: 3,
+        text: 'How are you currently using AI in your operations?',
+        options: [
+          'We\'re not using AI at all.',
+          'We use AI tools occasionally (ChatGPT etc.) without any real structure.',
+          'We have some AI tools integrated into specific workflows.',
+          'AI is embedded across multiple workflows with measurable productivity output.',
+        ],
+      },
+      {
+        section: 3,
+        text: 'How much of your team\'s time goes on tasks that could be automated?',
+        options: [
+          'Over 50% — admin and manual work is overwhelming.',
+          'Around 30–50% — we know it\'s a problem but haven\'t solved it.',
+          'Around 10–30% — we\'ve made improvements but there\'s more to do.',
+          'Under 10% — most automatable work has been automated.',
+        ],
+      },
+      // Section 4 — People & Process
+      {
+        section: 4,
+        text: 'How well documented are your core business processes?',
+        options: [
+          'Not documented — it lives in people\'s heads.',
+          'Partially documented, inconsistently maintained.',
+          'Most processes documented and reasonably followed.',
+          'Fully documented, version-controlled, and trained against.',
+        ],
+      },
+      {
+        section: 4,
+        text: 'How do you make operational decisions?',
+        options: [
+          'Gut feel and experience — we rarely use data.',
+          'We look at data occasionally but it\'s hard to access.',
+          'We review key metrics regularly with a reasonable data setup.',
+          'Data-driven decisions with real-time dashboards and automated alerts.',
+        ],
+      },
+      {
+        section: 4,
+        text: 'How would you rate your team\'s ability to scale current operations?',
+        options: [
+          'We\'re already stretched — more volume would break us.',
+          'We could handle some growth but it would be painful and slow.',
+          'We could grow moderately with some additional resource.',
+          'Our systems could scale significantly with minimal overhead.',
+        ],
+      },
+    ];
+
+    const TIERS = [
+      {
+        name: 'Foundational',
+        range: '0 – 12',
+        min: 0,
+        max: 12,
+        description:
+          'Your operations are largely manual and reactive. There are significant gaps in process, visibility, and automation that are costing you real money and time every week. The good news: the highest-leverage improvements are often the fastest to implement.',
+        risks: [
+          'High manual workload is limiting capacity and creating errors',
+          'Revenue is leaking through missed follow-ups, invoices, and renewals',
+          'No real-time visibility means decisions are made on incomplete information',
+          'Scaling is structurally difficult without process foundations in place',
+        ],
+        recommendation:
+          'Start with a full operational audit to identify the three highest-impact gaps. Priority areas are usually CRM implementation, lead handling automation, and basic reporting infrastructure. Quick wins are available within 4–8 weeks.',
+      },
+      {
+        name: 'Emerging',
+        range: '13 – 22',
+        min: 13,
+        max: 22,
+        description:
+          'You have the beginnings of operational systems but they\'re inconsistently applied and have significant gaps. You\'re aware of the problems and have started addressing them — but the full benefit of your investments isn\'t being captured yet.',
+        risks: [
+          'Inconsistent process adoption is undermining the value of existing systems',
+          'Revenue leakage continues through process gaps and handoff failures',
+          'Automation exists but isn\'t connected — creating islands of efficiency',
+          'Team scaling is adding complexity faster than capacity',
+        ],
+        recommendation:
+          'Focus on connecting and systematising what you already have before adding new tools. Process standardisation, automation sequencing, and reporting dashboards will unlock the value of your existing stack.',
+      },
+      {
+        name: 'Optimised',
+        range: '23 – 30',
+        min: 23,
+        max: 30,
+        description:
+          'Your operations are well-structured with good foundations across most areas. You\'ve invested in the right tools and most of your team follows established processes. The focus now is on eliminating remaining friction and adding the automation layer that takes you from good to excellent.',
+        risks: [
+          'Specific workflow gaps are creating bottlenecks that limit throughput',
+          'AI and advanced automation opportunities haven\'t yet been exploited',
+          'Reporting exists but isn\'t yet driving proactive operational decisions',
+        ],
+        recommendation:
+          'Target the specific bottlenecks limiting your throughput — typically 2–3 high-impact automation projects. AI-assisted workflows and advanced reporting are high-ROI next steps at your maturity level.',
+      },
+      {
+        name: 'Advanced',
+        range: '31 – 36',
+        min: 31,
+        max: 36,
+        description:
+          'You have strong operational maturity across all five dimensions. Your systems are well-connected, your processes are followed, and your team has real-time visibility. The opportunity now is embedding AI more deeply and fine-tuning for scale.',
+        risks: [
+          'Competitive advantage from operational excellence must be actively maintained',
+          'AI integration opportunities not yet captured represent a growing productivity gap',
+          'Continued scaling requires ongoing system iteration — not a one-time project',
+        ],
+        recommendation:
+          'Focus on AI-embedding across workflows, advanced analytics, and competitive differentiation through operational speed. Consider a quarterly operational review cadence to maintain and extend your advantage.',
+      },
+    ];
+
+    function getTier(score) {
+      return TIERS.find(t => score >= t.min && score <= t.max) || TIERS[0];
+    }
+
+    /* ─── State ─────────────────────────────────────────── */
+    let state = {
+      name: '',
+      email: '',
+      mobile: '',
+      answers: new Array(QUESTIONS.length).fill(null),
+      current: 0,
+    };
+
+    /* ─── Screen helpers ────────────────────────────────── */
+    function showScreen(id) {
+      document.querySelectorAll('.assess-screen').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ─── Gate form ─────────────────────────────────────── */
+    document.getElementById('gate-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name  = document.getElementById('g-name').value.trim();
+      const email = document.getElementById('g-email').value.trim();
+      const mobile = document.getElementById('g-mobile').value.trim();
+
+      // Basic validation
+      let valid = true;
+      if (!name)  { document.getElementById('g-name').classList.add('error');  valid = false; }
+      else          document.getElementById('g-name').classList.remove('error');
+      if (!email || !email.includes('@')) { document.getElementById('g-email').classList.add('error'); valid = false; }
+      else document.getElementById('g-email').classList.remove('error');
+      if (!mobile) { document.getElementById('g-mobile').classList.add('error'); valid = false; }
+      else          document.getElementById('g-mobile').classList.remove('error');
+
+      if (!valid) return;
+
+      state.name   = name;
+      state.email  = email;
+      state.mobile = mobile;
+      state.answers = new Array(QUESTIONS.length).fill(null);
+      state.current = 0;
+
+      // Pre-fill results email field
+      document.getElementById('r-email').value = email;
+
+      showScreen('screen-quiz');
+      renderQuestion();
+    });
+
+    /* ─── Quiz rendering ────────────────────────────────── */
+    function renderQuestion() {
+      const idx = state.current;
+      const q   = QUESTIONS[idx];
+      const total = QUESTIONS.length;
+      const pct = Math.round((idx / total) * 100);
+
+      // Section name
+      document.getElementById('quiz-section-name').textContent = SECTIONS[q.section];
+      document.getElementById('quiz-pct').textContent = pct + '% complete';
+      document.getElementById('quiz-bar-fill').style.width = pct + '%';
+
+      // Section dots (one per section)
+      const dotsEl = document.getElementById('quiz-dots');
+      dotsEl.innerHTML = '';
+      SECTIONS.forEach((_, si) => {
+        const d = document.createElement('div');
+        d.className = 'quiz-dot';
+        const firstIdx = QUESTIONS.findIndex(qq => qq.section === si);
+        const lastIdx  = QUESTIONS.map(qq => qq.section).lastIndexOf(si);
+        if (q.section > si) d.classList.add('done');
+        else if (q.section === si) d.classList.add('active');
+        dotsEl.appendChild(d);
+      });
+
+      // Question
+      document.getElementById('quiz-q-num').textContent = `Question ${idx + 1} of ${total}`;
+      document.getElementById('quiz-q-text').textContent = q.text;
+
+      // Re-animate card
+      const card = document.getElementById('quiz-card');
+      card.style.animation = 'none';
+      card.offsetHeight; // reflow
+      card.style.animation = '';
+
+      // Options
+      const optEl = document.getElementById('quiz-options');
+      optEl.innerHTML = '';
+      q.options.forEach((text, oi) => {
+        const div = document.createElement('div');
+        div.className = 'quiz-option' + (state.answers[idx] === oi ? ' selected' : '');
+        div.innerHTML = `<div class="quiz-option-dot"></div><div class="quiz-option-text">${text}</div>`;
+        div.addEventListener('click', () => selectOption(oi));
+        optEl.appendChild(div);
+      });
+
+      // Back button
+      const btnBack = document.getElementById('btn-back');
+      btnBack.style.display = idx === 0 ? 'none' : 'flex';
+
+      // Next button
+      updateNextBtn();
+    }
+
+    function selectOption(oi) {
+      state.answers[state.current] = oi;
+      // Update UI immediately
+      document.querySelectorAll('.quiz-option').forEach((el, i) => {
+        el.classList.toggle('selected', i === oi);
+      });
+      updateNextBtn();
+      // Auto-advance after brief pause
+      setTimeout(() => {
+        if (state.current < QUESTIONS.length - 1) {
+          state.current++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 320);
+    }
+
+    function updateNextBtn() {
+      const btn = document.getElementById('btn-next');
+      const answered = state.answers[state.current] !== null;
+      btn.classList.toggle('ready', answered);
+
+      const isLast = state.current === QUESTIONS.length - 1;
+      btn.innerHTML = (isLast ? 'See Results' : 'Next') +
+        `<svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      if (state.answers[state.current] === null) return;
+      if (state.current < QUESTIONS.length - 1) {
+        state.current++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    });
+
+    document.getElementById('btn-back').addEventListener('click', () => {
+      if (state.current > 0) {
+        state.current--;
+        renderQuestion();
+      }
+    });
+
+    /* ─── Results ───────────────────────────────────────── */
+    function showResults() {
+      const score = state.answers.reduce((sum, a) => sum + (a !== null ? a : 0), 0);
+      const tier  = getTier(score);
+
+      // Ring — use CSS variable for conic-gradient
+      const pct = Math.round((score / 36) * 100);
+      const ring = document.getElementById('results-ring');
+      ring.style.setProperty('--pct', pct);
+      // Animate conic gradient (CSS doesn't animate, so we fake it)
+      let current = 0;
+      const target = pct;
+      const step = () => {
+        current = Math.min(current + 2, target);
+        ring.style.background = `conic-gradient(var(--blue) ${current * 3.6}deg, var(--bg-border-lg) 0deg)`;
+        if (current < target) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+
+      document.getElementById('results-score-num').innerHTML = `${score}<small>/ 36</small>`;
+      document.getElementById('results-tier-name').textContent = tier.name;
+      document.getElementById('results-tier-range').textContent = `Score range: ${tier.range}`;
+      document.getElementById('results-desc').textContent = tier.description;
+
+      // Risks
+      const risksList = document.getElementById('results-risks');
+      risksList.innerHTML = tier.risks.map(r => `<li>${r}</li>`).join('');
+
+      document.getElementById('results-rec').textContent = tier.recommendation;
+
+      // Reset report button
+      const btnReport = document.getElementById('btn-report');
+      btnReport.classList.remove('sent');
+      btnReport.innerHTML = `Send My Report <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      document.getElementById('report-email-form').classList.remove('show');
+
+      showScreen('screen-results');
+    }
+
+    /* ─── Report button ─────────────────────────────────── */
+    document.getElementById('btn-report').addEventListener('click', function () {
+      const form = document.getElementById('report-email-form');
+      if (form.classList.contains('show')) return;
+      form.classList.add('show');
+      document.getElementById('r-email').focus();
+    });
+
+    document.getElementById('btn-send-report').addEventListener('click', function () {
+      const emailEl = document.getElementById('r-email');
+      const email = emailEl.value.trim();
+      if (!email || !email.includes('@')) {
+        emailEl.classList.add('error');
+        return;
+      }
+      emailEl.classList.remove('error');
+
+      // Simulate send
+      const btn = document.getElementById('btn-report');
+      btn.classList.add('sent');
+      btn.textContent = '✓ Report sent — check your inbox';
+      document.getElementById('report-email-form').classList.remove('show');
+    });
+
+    /* ─── Retake ────────────────────────────────────────── */
+    document.getElementById('btn-retake').addEventListener('click', () => {
+      state.answers = new Array(QUESTIONS.length).fill(null);
+      state.current = 0;
+      showScreen('screen-gate');
+    });
+
+  })();
+  </script>
+</body>
+</html>
