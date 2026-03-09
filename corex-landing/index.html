@@ -1169,6 +1169,19 @@
     .reveal-delay-5 { transition-delay: 0.40s; }
     .reveal-delay-6 { transition-delay: 0.48s; }
 
+    /* ─── Hero WebGL Shader Canvas ──────────────────────── */
+    #hero-webgl {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      display: block;
+    }
+
     /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 1024px) {
       .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1254,6 +1267,7 @@
   <!-- ─── Hero ───────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-bg"></div>
+    <canvas id="hero-webgl" aria-hidden="true"></canvas>
     <div class="grid-texture"></div>
     <!-- Twinkling star field -->
     <div class="hero-stars" aria-hidden="true"></div>
@@ -1641,6 +1655,95 @@
       </div>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script>
+  // ─── Hero WebGL Shader ──────────────────────────────────
+  (function () {
+    var canvas = document.getElementById('hero-webgl');
+    if (!canvas || !window.THREE) return;
+
+    var scene    = new THREE.Scene();
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: false, antialias: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(new THREE.Color(0x000000), 1);
+
+    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, -1);
+
+    var uniforms = {
+      resolution:  { value: [window.innerWidth, window.innerHeight] },
+      time:        { value: 0.0 },
+      xScale:      { value: 1.0 },
+      yScale:      { value: 0.42 },
+      distortion:  { value: 0.07 },
+    };
+
+    var vertexShader = [
+      'attribute vec3 position;',
+      'void main() {',
+      '  gl_Position = vec4(position, 1.0);',
+      '}',
+    ].join('\n');
+
+    var fragmentShader = [
+      'precision highp float;',
+      'uniform vec2  resolution;',
+      'uniform float time;',
+      'uniform float xScale;',
+      'uniform float yScale;',
+      'uniform float distortion;',
+      'void main() {',
+      '  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);',
+      '  float d  = length(p) * distortion;',
+      '  float rx = p.x * (1.0 + d);',
+      '  float gx = p.x;',
+      '  float bx = p.x * (1.0 - d);',
+      '  float ri = 0.038 / abs(p.y + sin((rx + time) * xScale) * yScale);',
+      '  float gi = 0.038 / abs(p.y + sin((gx + time) * xScale) * yScale);',
+      '  float bi = 0.038 / abs(p.y + sin((bx + time) * xScale) * yScale);',
+      '  // COREX brand palette',
+      '  // Blue primary  #005eb7 → (0.000, 0.369, 0.718)',
+      '  // Cyan accent   #B9FAF8 → (0.725, 0.980, 0.973)',
+      '  // Blue-light    #3382cc → (0.200, 0.510, 0.800)',
+      '  vec3 col = ri * vec3(0.000, 0.369, 0.718)',
+      '           + gi * vec3(0.725, 0.980, 0.973)',
+      '           + bi * vec3(0.200, 0.510, 0.800);',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '}',
+    ].join('\n');
+
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([
+      -1, -1, 0,  1, -1, 0,  -1, 1, 0,
+       1, -1, 0, -1,  1, 0,   1, 1, 0,
+    ]), 3));
+
+    var mat = new THREE.RawShaderMaterial({
+      vertexShader:   vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms:       uniforms,
+      side:           THREE.DoubleSide,
+    });
+
+    scene.add(new THREE.Mesh(geo, mat));
+
+    function resize() {
+      var w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h, false);
+      uniforms.resolution.value = [w, h];
+    }
+    resize();
+
+    function tick() {
+      uniforms.time.value += 0.007;
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    window.addEventListener('resize', resize);
+  })();
+  </script>
 
   <script>
     // ─── Scroll reveal ──────────────────────────────────────
