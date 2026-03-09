@@ -1169,6 +1169,37 @@
     .reveal-delay-5 { transition-delay: 0.40s; }
     .reveal-delay-6 { transition-delay: 0.48s; }
 
+    /* ─── Interactive Hover Button Animation ─────────────── */
+    .btn-interactive { position: relative; overflow: hidden; z-index: 0; }
+    .btn-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      position: relative; z-index: 2;
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-interactive:hover .btn-label { transform: translateX(130%); opacity: 0; }
+    .btn-hover-label {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
+      z-index: 2; pointer-events: none; color: inherit; font-size: inherit; font-weight: inherit;
+      letter-spacing: inherit; text-transform: inherit;
+      transform: translateX(-110%); opacity: 0;
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-hover-label svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-interactive:hover .btn-hover-label { transform: translateX(0); opacity: 1; }
+    .btn-bubble {
+      position: absolute; inset: 0; border-radius: inherit;
+      transform: scale(0); transform-origin: 25% 45%;
+      transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
+      z-index: 1; pointer-events: none;
+    }
+    .btn-interactive:hover .btn-bubble { transform: scale(1.6); }
+    .btn-hero-primary .btn-bubble, .btn-gate .btn-bubble,
+    .btn-assess .btn-bubble, .btn-report .btn-bubble,
+    .btn-transmit .btn-bubble, .btn-apply .btn-bubble,
+    .btn-nav-cta .btn-bubble { background: var(--blue-hover); }
+    .btn-hero-secondary .btn-bubble, .btn-contact .btn-bubble,
+    .btn-nav-ghost .btn-bubble { background: var(--blue); }
+
     /* ─── Hero WebGL Shader Canvas ──────────────────────── */
     #hero-webgl {
       position: absolute;
@@ -1874,6 +1905,34 @@
       // Stagger initial launches so they don't all fire at once
       stars.forEach((star, i) => {
         setTimeout(() => scheduleStar(star), i * 600);
+      });
+    })();
+
+    // ─── Interactive Hover Buttons ───────────────────────────
+    (function () {
+      var BTN_ARROW = '<svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var TARGETS = [
+        'btn-hero-primary', 'btn-hero-secondary',
+        'btn-gate', 'btn-assess', 'btn-report',
+        'btn-transmit', 'btn-apply', 'btn-contact',
+        'btn-nav-cta',
+      ];
+      TARGETS.forEach(function (cls) {
+        document.querySelectorAll('.' + cls).forEach(function (btn) {
+          if (btn.dataset.btnInit) return;
+          btn.dataset.btnInit = '1';
+          var text = '';
+          btn.childNodes.forEach(function (node) {
+            if (node.nodeType === 3) text += node.textContent;
+          });
+          text = text.trim();
+          if (!text) return;
+          btn.classList.add('btn-interactive');
+          btn.innerHTML =
+            '<span class="btn-label">' + text + '</span>' +
+            '<span class="btn-hover-label">' + text + BTN_ARROW + '</span>' +
+            '<span class="btn-bubble"></span>';
+        });
       });
     })();
   </script>

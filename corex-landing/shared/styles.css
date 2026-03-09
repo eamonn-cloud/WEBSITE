@@ -1673,3 +1673,84 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .form-row { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── Interactive Hover Button Animation ─────────────── */
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Label slides right and fades out on hover */
+.btn-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity  0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-interactive:hover .btn-label {
+  transform: translateX(130%);
+  opacity: 0;
+}
+
+/* Hover label slides in from the left */
+.btn-hover-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transform: translateX(-110%);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity  0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-hover-label svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn-interactive:hover .btn-hover-label {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Bubble — expands from inside the button */
+.btn-bubble {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: scale(0);
+  transform-origin: 25% 45%;
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+.btn-interactive:hover .btn-bubble {
+  transform: scale(1.6);
+}
+
+/* Solid blue buttons — bubble is slightly darker blue */
+.btn-hero-primary .btn-bubble,
+.btn-gate .btn-bubble,
+.btn-assess .btn-bubble,
+.btn-report .btn-bubble,
+.btn-transmit .btn-bubble,
+.btn-apply .btn-bubble,
+.btn-nav-cta .btn-bubble {
+  background: var(--blue-hover);
+}
+
+/* Outline / ghost buttons — bubble fills with brand blue */
+.btn-hero-secondary .btn-bubble,
+.btn-contact .btn-bubble,
+.btn-nav-ghost .btn-bubble {
+  background: var(--blue);
+}
