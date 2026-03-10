@@ -40,10 +40,20 @@
   --font-body:    'Poppins', sans-serif;
 }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: none; }
+/* Grid lives on html — always rendered, never blocked by body background */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: none;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 96px 96px;
+  background-attachment: fixed;
+}
 
 body {
-  background-color: var(--bg);
+  background-color: transparent;
   color: var(--white);
   font-family: var(--font-body);
   font-size: 17px;
@@ -52,6 +62,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
@@ -148,7 +159,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 .nav-link:hover { color: var(--white); background: var(--white-06); }
 .nav-link svg { width: 10px; height: 10px; transition: transform 0.2s; }
-.nav-item:hover .nav-link svg { transform: rotate(180deg); }
+.nav-item.open .nav-link svg { transform: rotate(180deg); }
 
 .nav-dropdown {
   position: absolute;
@@ -165,7 +176,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   transition: opacity 0.2s, transform 0.2s;
   z-index: 100;
 }
-.nav-item:hover .nav-dropdown {
+.nav-item.open .nav-dropdown {
   opacity: 1;
   pointer-events: all;
   transform: translateY(0);
@@ -470,7 +481,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   inset: 0;
   background:
     radial-gradient(ellipse 60% 80% at 50% -20%, rgba(0, 94, 183, 0.35) 0%, transparent 65%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-mid) 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-mid) 75%, transparent 100%);
   pointer-events: none;
 }
 
@@ -1316,6 +1327,16 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .info-card-icon {
   font-size: 32px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-card-icon img {
+  height: 40px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
 }
 
 .info-card-title {
@@ -1381,6 +1402,166 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 /* ─── Insight / Blog Card ────────────────────────────── */
+/* ─── Insight thumbnail ──────────────────────────────── */
+.insight-thumb {
+  width: calc(100% + 56px);
+  margin: -32px -28px 24px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 14px 14px 0 0;
+}
+.insight-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.insight-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(5, 12, 40, 0.75));
+}
+.insight-card:hover .insight-thumb img { transform: scale(1.05); }
+
+/* ─── Featured insight thumb ─────────────────────────── */
+.insight-thumb-featured {
+  flex-shrink: 0;
+  width: 260px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}
+.insight-thumb-featured img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.insight-thumb-featured::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 94, 183, 0.3), rgba(5, 12, 40, 0.5));
+}
+.insight-card:hover .insight-thumb-featured img { transform: scale(1.05); }
+
+/* ─── Before / After split ───────────────────────────── */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--bg-border-lg);
+  position: relative;
+  margin-top: 60px;
+}
+.before-after-side {
+  height: 380px;
+  overflow: hidden;
+  position: relative;
+}
+.before-after-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.before-after-side.ba-before::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(5,12,40,0.75) 0%, rgba(30,20,10,0.5) 100%);
+}
+.before-after-side.ba-after::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,40,100,0.6) 0%, rgba(5,12,40,0.4) 100%);
+}
+.ba-label {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  z-index: 2;
+}
+.ba-label-pill {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+.ba-before .ba-label-pill { background: rgba(255,255,255,0.1); color: var(--white-60); border: 1px solid var(--white-12); }
+.ba-after .ba-label-pill { background: rgba(0,94,183,0.2); color: var(--cyan); border: 1px solid rgba(0,94,183,0.4); }
+.ba-label-title {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  display: block;
+}
+.ba-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--blue) 25%, var(--blue) 75%, transparent);
+  z-index: 3;
+  pointer-events: none;
+}
+.ba-divider-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  font-size: 14px;
+  color: var(--cyan);
+}
+
+/* ─── Industry photo banner ──────────────────────────── */
+.industry-photo-banner {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+  border: 1px solid var(--bg-border-lg);
+  margin-bottom: 0;
+}
+.industry-photo-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.industry-photo-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,30,80,0.65) 0%, rgba(5,12,40,0.45) 100%);
+}
+
 .insight-card {
   background: var(--bg-card);
   border: 1px solid var(--bg-border-lg);

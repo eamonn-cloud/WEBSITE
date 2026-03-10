@@ -154,6 +154,31 @@
     });
   }
 
+  /* ── Dropdown hover with close delay ─────────────────── */
+  function initDropdowns() {
+    document.querySelectorAll('.nav-item').forEach(function(item) {
+      if (!item.querySelector('.nav-dropdown')) return;
+      var timer = null;
+      item.addEventListener('mouseenter', function() {
+        clearTimeout(timer);
+        item.classList.add('open');
+      });
+      item.addEventListener('mouseleave', function() {
+        timer = setTimeout(function() {
+          item.classList.remove('open');
+        }, 150);
+      });
+    });
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-item')) {
+        document.querySelectorAll('.nav-item.open').forEach(function(item) {
+          item.classList.remove('open');
+        });
+      }
+    });
+  }
+
   /* ── Nav scroll state ─────────────────────────────────── */
   function initNavScroll() {
     const nav = document.getElementById('nav');
@@ -172,7 +197,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
 
@@ -450,6 +475,7 @@
   /* ── Init ─────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     injectShell();
+    initDropdowns();
     initNavScroll();
     initReveal();
     initHeroEntrance();
