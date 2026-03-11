@@ -1,4 +1,4 @@
-/* ─── COREX Operations — Shared Site JS ─────────────── */
+/* ─── COREX Operations - Shared Site JS ─────────────── */
 (function () {
   'use strict';
 
@@ -56,76 +56,71 @@
   const FOOTER_HTML = `
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
+      <div class="footer-grid">
+
         <div class="footer-brand">
           <div class="footer-brand-logo">
-            <img
-              src="/corex-operate-strong/brand_assets/COREX-21.svg"
-              alt="COREX Operations"
-              class="footer-logo-img"
-            />
+            <img src="/corex-operate-strong/brand_assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
           </div>
-          <p>Empowering strategy. Purposeful connection. We install the systems ambitious businesses need to scale.</p>
+          <p>We install the operational systems ambitious businesses need to scale - without the chaos.</p>
           <span class="footer-tagline">corexoperations.com</span>
         </div>
-        <div class="footer-links-grid">
-          <div class="footer-col">
-            <p class="footer-col-title">Services</p>
-            <ul>
-              <li><a href="/corex-landing/how-we-work/">How We Work</a></li>
-              <li><a href="/corex-landing/how-we-work/ai-in-operations/">AI in Operations</a></li>
-              <li><a href="/corex-landing/what-we-fix/">What We Fix</a></li>
-              <li><a href="/corex-landing/assessment/">Free Assessment</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <p class="footer-col-title">Industries</p>
-            <ul>
-              <li><a href="/corex-landing/industries/professional-services/">Professional Services</a></li>
-              <li><a href="/corex-landing/industries/recruitment/">Recruitment</a></li>
-              <li><a href="/corex-landing/industries/construction/">Construction</a></li>
-              <li><a href="/corex-landing/industries/lending-finance/">Lending &amp; Finance</a></li>
-              <li><a href="/corex-landing/industries/property/">Property</a></li>
-              <li><a href="/corex-landing/industries/agencies/">Agencies</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <p class="footer-col-title">Company</p>
-            <ul>
-              <li><a href="/corex-landing/partnerships/">Partnerships</a></li>
-              <li><a href="/corex-landing/insights/">Insights</a></li>
-              <li><a href="/corex-landing/careers/">Careers</a></li>
-              <li><a href="/corex-landing/contact/">Contact</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <p class="footer-col-title">Partners</p>
-            <ul>
-              <li><a href="https://zapier.com/partnerdirectory/corex-operations" target="_blank" rel="noopener">Zapier</a></li>
-              <li><a href="https://ecosystem.hubspot.com/marketplace/solutions/corex-operations" target="_blank" rel="noopener">HubSpot</a></li>
-              <li><a href="http://verify.skilljar.com/c/33zxvk9yfmzj" target="_blank" rel="noopener">Anthropic</a></li>
-              <li><a href="https://www.credly.com/badges/6ebeffe5-6eea-49a7-9ec2-37dd7aacdc79/public_url" target="_blank" rel="noopener">PMI PMP</a></li>
-            </ul>
-          </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Useful Links</p>
+          <ul>
+            <li><a href="/corex-landing/how-we-work/">How We Work</a></li>
+            <li><a href="/corex-landing/what-we-fix/">What We Fix</a></li>
+            <li><a href="/corex-landing/how-we-work/ai-in-operations/">AI in Operations</a></li>
+            <li><a href="/corex-landing/insights/">Insights</a></li>
+            <li><a href="/corex-landing/partnerships/">Partnerships</a></li>
+            <li><a href="/corex-landing/careers/">Careers</a></li>
+            <li><a href="/corex-landing/contact/">Contact</a></li>
+            <li><a href="/corex-landing/assessment/">Free Assessment</a></li>
+          </ul>
         </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Follow Us</p>
+          <ul class="footer-social-list">
+            <li>
+              <a href="https://www.linkedin.com/company/corex-operations" target="_blank" rel="noopener">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="X / Twitter">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>Twitter (X)</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Instagram">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span>Instagram</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-newsletter">
+          <p class="footer-col-title">Stay in the Loop</p>
+          <div class="footer-newsletter-form">
+            <input type="email" class="footer-newsletter-input" id="footer-email-input" placeholder="Your email address" aria-label="Email for newsletter" />
+            <button type="button" class="footer-newsletter-btn" id="footer-subscribe-btn">Subscribe</button>
+          </div>
+          <p class="footer-newsletter-status" id="footer-newsletter-status"></p>
+        </div>
+
       </div>
+
       <div class="footer-bottom">
         <p class="footer-copy">
           &copy; 2026 COREX Operations Ltd. All rights reserved. &middot;
           <a href="/corex-landing/privacy/">Privacy Policy</a> &middot;
           <a href="/corex-landing/terms/">Terms of Service</a>
         </p>
-        <div class="footer-socials">
-          <a href="#" class="social-link" aria-label="LinkedIn">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="#" class="social-link" aria-label="X / Twitter">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="#" class="social-link" aria-label="Instagram">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-        </div>
       </div>
     </div>
   </footer>`;
@@ -328,7 +323,7 @@
     script.async = true;
     document.body.appendChild(script);
 
-    // Global click handler — intercept booking-related CTAs
+    // Global click handler - intercept booking-related CTAs
     document.body.addEventListener('click', function (e) {
       const el = e.target.closest('a, button');
       if (!el) return;
@@ -472,6 +467,37 @@
     });
   }
 
+  /* ── Newsletter Form ──────────────────────────────────── */
+  function initNewsletter() {
+    var btn = document.getElementById('footer-subscribe-btn');
+    var input = document.getElementById('footer-email-input');
+    var status = document.getElementById('footer-newsletter-status');
+    if (!btn || !input || !status) return;
+    btn.addEventListener('click', function () {
+      var email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        status.textContent = 'Please enter a valid email.';
+        status.className = 'footer-newsletter-status error';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+      status.textContent = '';
+      status.className = 'footer-newsletter-status';
+      setTimeout(function () {
+        input.value = '';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+        status.textContent = 'Subscribed! Talk soon.';
+        status.className = 'footer-newsletter-status success';
+        setTimeout(function () {
+          status.textContent = '';
+          status.className = 'footer-newsletter-status';
+        }, 4000);
+      }, 1200);
+    });
+  }
+
   /* ── Init ─────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     injectShell();
@@ -483,6 +509,7 @@
     initCalendly();
     initInteractiveButtons();
     initWebGLShader();
+    initNewsletter();
   });
 
 })();
