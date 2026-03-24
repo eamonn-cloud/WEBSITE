@@ -6,48 +6,65 @@
   const NAV_HTML = `
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="/corex-landing/" class="nav-logo">
+      <a href="/" class="nav-logo">
         <img
-          src="/corex-operate-strong/brand_assets/COREX-21.svg"
+          src="/assets/COREX-21.svg"
           alt="COREX Operations"
           class="nav-logo-img"
         />
       </a>
       <ul class="nav-links">
         <li class="nav-item">
-          <a href="/corex-landing/how-we-work/" class="nav-link">
+          <a href="/how-we-work/" class="nav-link">
             How We Work
             <svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <div class="nav-dropdown">
-            <a href="/corex-landing/how-we-work/">Our Approach</a>
-            <a href="/corex-landing/how-we-work/ai-in-operations/">AI in Operations</a>
+            <a href="/how-we-work/">Our Approach</a>
+            <a href="/how-we-work/ai-in-operations/">AI in Operations</a>
           </div>
         </li>
-        <li class="nav-item"><a href="/corex-landing/what-we-fix/" class="nav-link">What We Fix</a></li>
+        <li class="nav-item"><a href="/what-we-fix/" class="nav-link">What We Fix</a></li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             Industries
             <svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <div class="nav-dropdown">
-            <a href="/corex-landing/industries/professional-services/">Professional Services</a>
-            <a href="/corex-landing/industries/recruitment/">Recruitment</a>
-            <a href="/corex-landing/industries/construction/">Construction</a>
-            <a href="/corex-landing/industries/lending-finance/">Lending &amp; Finance</a>
-            <a href="/corex-landing/industries/property/">Property</a>
-            <a href="/corex-landing/industries/agencies/">Agencies</a>
+            <a href="/industries/professional-services/">Professional Services</a>
+            <a href="/industries/recruitment/">Recruitment</a>
+            <a href="/industries/lending-finance/">Lending &amp; Finance</a>
+            <a href="/industries/property/">Property</a>
+            <a href="/industries/agencies/">Agencies</a>
           </div>
         </li>
-        <li class="nav-item"><a href="/corex-landing/insights/" class="nav-link">Insights</a></li>
-        <li class="nav-item"><a href="/corex-landing/partnerships/" class="nav-link">Partnerships</a></li>
+        <li class="nav-item"><a href="/insights/" class="nav-link">Insights</a></li>
+        <li class="nav-item"><a href="/partnerships/" class="nav-link">Partnerships</a></li>
       </ul>
       <div class="nav-right">
-        <a href="/corex-landing/contact/" class="btn-nav-ghost">Contact</a>
-        <a href="/corex-landing/assessment/" class="btn-nav-cta">Free Assessment</a>
-        <button class="nav-hamburger" aria-label="Open menu">
+        <a href="/contact/" class="btn-nav-ghost">Contact</a>
+        <a href="/assessment/" class="btn-nav-cta">Free Assessment</a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
+      </div>
+    </div>
+    <div class="nav-mobile-drawer" id="nav-mobile-drawer">
+      <a href="/">Home</a>
+      <a href="/how-we-work/">How We Work</a>
+      <a href="/how-we-work/ai-in-operations/" class="mob-sub">AI in Operations</a>
+      <a href="/what-we-fix/">What We Fix</a>
+      <a href="/insights/">Insights</a>
+      <a href="/partnerships/">Partnerships</a>
+      <span style="font-family:var(--font-head);font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);padding:20px 0 6px;display:block;">Industries</span>
+      <a href="/industries/professional-services/" class="mob-sub">Professional Services</a>
+      <a href="/industries/recruitment/" class="mob-sub">Recruitment</a>
+      <a href="/industries/lending-finance/" class="mob-sub">Lending &amp; Finance</a>
+      <a href="/industries/property/" class="mob-sub">Property</a>
+      <a href="/industries/agencies/" class="mob-sub">Agencies</a>
+      <div class="nav-mobile-ctas">
+        <a href="/contact/" class="btn-nav-ghost">Contact</a>
+        <a href="/assessment/" class="btn-nav-cta">Free Assessment</a>
       </div>
     </div>
   </nav>`;
@@ -60,23 +77,22 @@
 
         <div class="footer-brand">
           <div class="footer-brand-logo">
-            <img src="/corex-operate-strong/brand_assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
+            <img src="/assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
           </div>
-          <p>We install the operational systems ambitious businesses need to scale - without the chaos.</p>
+          <p>We build the automation and AI systems that let ambitious businesses run without manual work.</p>
           <span class="footer-tagline">corexoperations.com</span>
         </div>
 
         <div class="footer-col">
           <p class="footer-col-title">Useful Links</p>
           <ul>
-            <li><a href="/corex-landing/how-we-work/">How We Work</a></li>
-            <li><a href="/corex-landing/what-we-fix/">What We Fix</a></li>
-            <li><a href="/corex-landing/how-we-work/ai-in-operations/">AI in Operations</a></li>
-            <li><a href="/corex-landing/insights/">Insights</a></li>
-            <li><a href="/corex-landing/partnerships/">Partnerships</a></li>
-            <li><a href="/corex-landing/careers/">Careers</a></li>
-            <li><a href="/corex-landing/contact/">Contact</a></li>
-            <li><a href="/corex-landing/assessment/">Free Assessment</a></li>
+            <li><a href="/how-we-work/">How We Work</a></li>
+            <li><a href="/what-we-fix/">What We Fix</a></li>
+            <li><a href="/how-we-work/ai-in-operations/">AI in Operations</a></li>
+            <li><a href="/insights/">Insights</a></li>
+            <li><a href="/partnerships/">Partnerships</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/assessment/">Free Assessment</a></li>
           </ul>
         </div>
 
@@ -118,8 +134,8 @@
       <div class="footer-bottom">
         <p class="footer-copy">
           &copy; 2026 COREX Operations Ltd. All rights reserved. &middot;
-          <a href="/corex-landing/privacy/">Privacy Policy</a> &middot;
-          <a href="/corex-landing/terms/">Terms of Service</a>
+          <a href="/privacy/">Privacy Policy</a> &middot;
+          <a href="/terms/">Terms of Service</a>
         </p>
       </div>
     </div>
@@ -143,7 +159,7 @@
     // Highlight active nav link
     const path = window.location.pathname;
     document.querySelectorAll('.nav-link, .nav-dropdown a').forEach(link => {
-      if (link.getAttribute('href') && path.includes(link.getAttribute('href').replace('/corex-landing', '').replace(/\/$/, ''))) {
+      if (link.getAttribute('href') && path.includes(link.getAttribute('href').replace('', '').replace(/\/$/, ''))) {
         link.style.color = 'var(--white)';
       }
     });
@@ -172,6 +188,34 @@
         });
       }
     });
+  }
+
+  /* ── Mobile Nav ───────────────────────────────────────── */
+  function initMobileNav() {
+    const nav = document.getElementById('nav');
+    const hamburger = document.getElementById('nav-hamburger');
+    if (!hamburger || !nav) return;
+    function openMenu() {
+      nav.classList.add('nav-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      nav.classList.remove('nav-open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      nav.classList.contains('nav-open') ? closeMenu() : openMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+    const drawer = document.getElementById('nav-mobile-drawer');
+    if (drawer) {
+      drawer.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') closeMenu();
+      });
+    }
   }
 
   /* ── Nav scroll state ─────────────────────────────────── */
@@ -467,6 +511,21 @@
     });
   }
 
+  /* ── EmailJS ──────────────────────────────────────────── */
+  // Exposed on window so inline page scripts can access them
+  window.EMAILJS_SERVICE_ID          = 'service_dophbfm';
+  window.EMAILJS_TEMPLATE_CONTACT    = 'template_8dbzh3v';
+  window.EMAILJS_TEMPLATE_ASSESSMENT = 'template_ey3aipy';
+  var EMAILJS_PUBLIC_KEY             = '02Dg2NNa2p5mbLu2a';
+
+  window.loadEmailJS = function (cb) {
+    if (window.emailjs) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    s.onload = function () { window.emailjs.init(EMAILJS_PUBLIC_KEY); cb(); };
+    document.head.appendChild(s);
+  };
+
   /* ── Newsletter Form ──────────────────────────────────── */
   function initNewsletter() {
     var btn = document.getElementById('footer-subscribe-btn');
@@ -484,7 +543,11 @@
       btn.textContent = 'Subscribing...';
       status.textContent = '';
       status.className = 'footer-newsletter-status';
-      setTimeout(function () {
+      fetch('https://hooks.zapier.com/hooks/catch/26044199/upkshqt/', {
+        method: 'POST',
+        body: JSON.stringify({ email: email }),
+      })
+      .then(function () {
         input.value = '';
         btn.disabled = false;
         btn.textContent = 'Subscribe';
@@ -494,7 +557,13 @@
           status.textContent = '';
           status.className = 'footer-newsletter-status';
         }, 4000);
-      }, 1200);
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+        status.textContent = 'Something went wrong. Try again.';
+        status.className = 'footer-newsletter-status error';
+      });
     });
   }
 
@@ -502,6 +571,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     injectShell();
     initDropdowns();
+    initMobileNav();
     initNavScroll();
     initReveal();
     initHeroEntrance();

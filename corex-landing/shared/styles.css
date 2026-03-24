@@ -30,8 +30,8 @@
   /* Neutrals */
   --white:        #ffffff;
   --white-80:     rgba(255,255,255,0.88);
-  --white-60:     rgba(255,255,255,0.75);
-  --white-35:     rgba(255,255,255,0.55);
+  --white-60:     rgba(255,255,255,0.82);
+  --white-35:     rgba(255,255,255,0.65);
   --white-12:     rgba(255,255,255,0.18);
   --white-06:     rgba(255,255,255,0.07);
 
@@ -243,6 +243,61 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .nav-hamburger span {
   display: block; width: 22px; height: 1.5px;
   background: var(--white-60); border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── Mobile drawer ──────────────────────────────────── */
+.nav-mobile-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4, 15, 61, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 80px 28px 40px;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+.nav-open .nav-mobile-drawer { display: flex; }
+.nav-mobile-drawer a {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white-80);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--white-06);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-mobile-drawer a:hover { color: var(--cyan); }
+.nav-mobile-drawer .mob-sub {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--white-60);
+  padding: 10px 0 10px 16px;
+  border-bottom: 1px solid var(--white-06);
+}
+.nav-mobile-drawer .mob-sub:hover { color: var(--cyan); }
+.nav-mobile-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.nav-mobile-ctas .btn-nav-ghost,
+.nav-mobile-ctas .btn-nav-cta {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
 }
 
 /* ─── Shooting stars SVG layer ──────────────────────── */
@@ -496,9 +551,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   align-items: center;
   gap: 6px;
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white-35);
   margin-bottom: 24px;
@@ -516,7 +571,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   border-radius: 100px;
   background: rgba(0, 94, 183, 0.1);
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -584,9 +639,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .cert-label {
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--white-35);
   flex-shrink: 0;
@@ -631,9 +686,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 /* ─── Section shared ─────────────────────────────────── */
 .section-label {
   font-family: var(--font-head);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cyan);
   margin-bottom: 14px;
@@ -745,7 +800,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 400;
   color: var(--white-60);
 }
@@ -863,9 +918,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .metric-label {
   font-family: var(--font-head);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--white-60);
   line-height: 1.4;
@@ -990,7 +1045,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   gap: 6px;
 }
 .ind-list li {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 300;
   color: var(--white-60);
   padding-left: 14px;
@@ -1120,7 +1175,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .assess-note {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 300;
   color: var(--white-35);
 }
@@ -1153,9 +1208,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .footer-brand p {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.60);
   line-height: 1.65;
   margin-bottom: 20px;
 }
@@ -1187,9 +1242,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .footer-col a {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.60);
   transition: color 0.2s;
 }
 .footer-col a:hover { color: var(--white); }
@@ -1206,9 +1261,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.60);
   transition: color 0.2s;
 }
 .footer-social-list a:hover { color: var(--white); }
@@ -1672,7 +1727,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .insight-body {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
   color: var(--white-60);
   line-height: 1.7;
@@ -1681,9 +1736,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .insight-meta {
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--white-35);
 }
@@ -1698,9 +1753,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .form-label {
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white-60);
 }
@@ -1784,9 +1839,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .stat-label {
   font-family: var(--font-head);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white-60);
   line-height: 1.4;

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>COREX Operations - We Install Operational Excellence Systems</title>
-  <meta name="description" content="Rebuild your operations, eliminate revenue leakage, and scale without the chaos. Digital operating models, process automation, and AI implementation for ambitious businesses." />
+  <title>COREX Operations - We Eliminate Manual Work</title>
+  <meta name="description" content="We build automation and AI systems inside your existing tools that eliminate the manual work costing you hours every week. Hands-on. Weeks, not months." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Montserrat = closest Google Fonts match to Gotham. Poppins = brand alternative. -->
@@ -414,11 +414,11 @@
 
     .hero-title-line2 {
       font-family: var(--font-head);
-      font-size: clamp(40px, 6.5vw, 76px);
-      font-weight: 900;
+      font-size: clamp(24px, 3.2vw, 42px);
+      font-weight: 700;
       text-transform: uppercase;
-      color: var(--white);
-      letter-spacing: -0.01em;
+      color: var(--white-60);
+      letter-spacing: 0.02em;
       margin-bottom: 28px;
       display: block;
     }
@@ -489,6 +489,26 @@
     }
     .btn-hero-secondary svg { width: 16px; height: 16px; transition: transform 0.2s; }
     .btn-hero-secondary:hover svg { transform: translateX(3px); }
+
+    /* ─── Social Proof Strip ─────────────────────────────── */
+    .social-proof-strip {
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      font-family: var(--font-head);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .proof-count { color: rgba(255,255,255,0.7); }
+    .proof-sep { opacity: 0.3; }
 
     /* ─── Partner / Cert Strip ───────────────────────────── */
     .cert-strip {
@@ -674,7 +694,7 @@
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 400;
       color: var(--white-60);
     }
@@ -749,7 +769,7 @@
       margin-bottom: 6px;
     }
     .step-body {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--white-60);
       line-height: 1.6;
@@ -921,7 +941,7 @@
       gap: 6px;
     }
     .ind-list li {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--white-60);
       padding-left: 14px;
@@ -987,6 +1007,15 @@
       margin-bottom: 20px;
     }
 
+    .assessment-cost-calc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
     .assessment-body {
       font-size: 17px;
       font-weight: 300;
@@ -1001,6 +1030,66 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    /* ─── Pricing Table ──────────────────────────────────── */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      border: 1px solid var(--white-06);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .pricing-table th {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      padding: 14px 24px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--white-06);
+      text-align: left;
+    }
+    .pricing-table td {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--white-06);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .pricing-table .tier-name {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .pricing-table .tier-price {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      white-space: nowrap;
+    }
+    .pricing-table .tier-timeline {
+      font-size: 12px;
+      color: var(--white-35);
+      white-space: nowrap;
+    }
+    .pricing-note {
+      font-size: 13px;
+      color: var(--white-35);
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
     }
 
     .btn-assess {
@@ -1052,7 +1141,7 @@
     /* Small print under CTA */
     .assess-note {
       margin-top: 20px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--white-35);
     }
@@ -1082,9 +1171,9 @@
     }
 
     .footer-brand p {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.60);
       line-height: 1.65;
       margin-bottom: 20px;
     }
@@ -1116,9 +1205,9 @@
     }
 
     .footer-col a {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.60);
       transition: color 0.2s;
     }
     .footer-col a:hover { color: var(--white); }
@@ -1133,9 +1222,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.60);
       transition: color 0.2s;
     }
     .footer-social-list a:hover { color: var(--white); }
@@ -1374,55 +1463,85 @@
             <path d="M5 1L6.5 4H9.5L7 6L8 9L5 7.5L2 9L3 6L0.5 4H3.5L5 1Z" fill="white"/>
           </svg>
         </div>
-        Operational Excellence · AI-Powered Systems
+        AI-Powered Operations · Built in Your Existing Tools
       </div>
 
       <h1 class="hero-title">
-        We Install
-        <span class="hero-title-accent">Operational</span>
+        Your business runs on
+        <span class="hero-title-accent">manual work and guesswork.</span>
       </h1>
-      <span class="hero-title-line2">Excellence Systems</span>
+      <span class="hero-title-line2">We build the AI systems that eliminate both.</span>
 
       <p class="hero-subtitle">
-        Rebuild your operations, eliminate revenue leakage, and scale without the chaos. We design, build, and implement the systems your business actually needs to run.
+        Intelligent onboarding. Autonomous reporting. Self-optimising pipelines. Built in your existing tools. Running in 2-4 weeks.
       </p>
 
       <div class="hero-ctas">
-        <a href="/assessment" class="btn-hero-primary">
-          Take the Free Assessment
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="/how-we-work" class="btn-hero-secondary">
-          Learn Our Approach
+        <a href="/assessment/" class="btn-hero-primary">
+          Book a Free 20-Min Operations Audit
           <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
   </section>
 
+  <!-- ─── Social Proof Strip ───────────────────────────── -->
+  <div class="social-proof-strip">
+    <span class="proof-count">AI-powered operations built for 12+ businesses</span>
+    <span class="proof-sep">·</span>
+    <span class="proof-quote">Cosy Cabins · C11 Recovery · Burrows &amp; Partners · DealDrive · AITON · Mountleader Media · Uplead Digital + more</span>
+  </div>
+
   <!-- ─── Certifications Strip ──────────────────────────── -->
   <section class="cert-strip">
     <div class="container">
       <div class="cert-inner">
-        <span class="cert-label">Certified &amp; Partnered with</span>
+        <span class="cert-label">Certified to build intelligent systems in the tools you already use</span>
         <div class="cert-divider"></div>
         <div class="cert-logos">
           <a href="http://verify.skilljar.com/c/33zxvk9yfmzj" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/corex-landing/assets/badges/claude-badge.png" alt="Anthropic" /></div>
+            <div class="cert-icon"><img src="/assets/badges/claude-badge.png" alt="Anthropic" /></div>
             Anthropic · Claude
           </a>
           <a href="https://zapier.com/partnerdirectory/corex-operations" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/corex-landing/assets/badges/zapier-badge.png" alt="Zapier" /></div>
+            <div class="cert-icon"><img src="/assets/badges/zapier-badge.png" alt="Zapier" /></div>
             Zapier Solutions Partner
           </a>
           <a href="https://ecosystem.hubspot.com/marketplace/solutions/corex-operations" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/corex-landing/assets/badges/hubspot-badge.png" alt="HubSpot" /></div>
+            <div class="cert-icon"><img src="/assets/badges/hubspot-badge.png" alt="HubSpot" /></div>
             HubSpot Solutions Partner
           </a>
           <a href="https://www.credly.com/badges/6ebeffe5-6eea-49a7-9ec2-37dd7aacdc79/public_url" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/corex-landing/assets/badges/pmp-badge.png" alt="PMI PMP" /></div>
+            <div class="cert-icon"><img src="/assets/badges/pmp-badge.png" alt="PMI PMP" /></div>
             PMI PMP Certified
           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── The Problem ──────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">The Problem</p>
+        <h2 class="section-title">Most businesses have automation.<br/>Few have intelligence.</h2>
+      </div>
+      <div class="capabilities-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="cap-card reveal">
+          <div class="cap-icon">😓</div>
+          <h3 class="cap-title">Manual Work</h3>
+          <p class="cap-body">Your team is the system. Everything stops when they're gone. Every new client, every report, every handoff requires a human in the middle.</p>
+        </div>
+        <div class="cap-card reveal reveal-delay-1">
+          <div class="cap-icon">⚡</div>
+          <h3 class="cap-title">Dumb Automation</h3>
+          <p class="cap-body">You have Zapier workflows. They break when anything changes. Someone still has to watch them. You automated the task but not the thinking.</p>
+        </div>
+        <div class="cap-card reveal reveal-delay-2">
+          <div class="cap-icon">🤖</div>
+          <h3 class="cap-title">Intelligent Systems</h3>
+          <p class="cap-body">AI agents that adapt, make decisions, flag exceptions, and operate autonomously. This is where COREX builds.</p>
         </div>
       </div>
     </div>
@@ -1433,57 +1552,64 @@
     <div class="capabilities-bg"></div>
     <div class="container">
       <div class="capabilities-header reveal">
-        <p class="section-label">What We Do</p>
-        <h2 class="section-title">Four disciplines.<br/>One operating system.</h2>
-        <p class="section-body" style="max-width:520px; margin:0 auto;">We don't bolt on fixes. We design how your business should run - end to end - and build the systems to make it happen.</p>
+        <p class="section-label">What We Build</p>
+        <h2 class="section-title">Five intelligent systems.<br/>One business that runs itself.</h2>
+        <p class="section-body" style="max-width:520px; margin:0 auto;">We don't give you a strategy deck. We build the actual AI-powered systems - inside the tools you already use - and hand them over running.</p>
       </div>
 
       <div class="capabilities-grid">
         <div class="cap-card reveal">
-          <div class="cap-icon">🏗️</div>
-          <h3 class="cap-title">Digital Operating Model Design</h3>
-          <p class="cap-body">Launch streamlined operational systems that outperform manual processes from day one.</p>
+          <div class="cap-icon">🚀</div>
+          <h3 class="cap-title">Intelligent Onboarding Engine</h3>
+          <p class="cap-body">Client signs - AI generates personalised onboarding plan, auto-assigns team based on client profile, monitors setup completion, escalates blockers to Slack.</p>
           <ul class="cap-bullets">
-            <li>Reduced cycle times</li>
-            <li>Self-service workflows</li>
-            <li>Automated handoffs</li>
-            <li>Real-time visibility</li>
+            <li>Contract signed to full setup in under 10 minutes</li>
+            <li>AI-generated onboarding plans and welcome assets</li>
+            <li>Zero manual chasing. Saves £1-2K/month in VA costs.</li>
           </ul>
         </div>
 
         <div class="cap-card reveal reveal-delay-1">
-          <div class="cap-icon">⚙️</div>
-          <h3 class="cap-title">Process Automation &amp; Optimisation</h3>
-          <p class="cap-body">Connect your siloed tools into a unified operational ecosystem that runs itself.</p>
+          <div class="cap-icon">📊</div>
+          <h3 class="cap-title">Revenue Intelligence System</h3>
+          <p class="cap-body">AI scores leads in real-time, auto-routes by intent signals, predicts close probability, surfaces at-risk deals, writes follow-up sequences.</p>
           <ul class="cap-bullets">
-            <li>Unified data layer</li>
-            <li>Process automation</li>
-            <li>Real-time sync</li>
-            <li>Scalable architecture</li>
+            <li>20-30% more revenue from existing lead flow</li>
+            <li>AI-written email sequences and pipeline snapshots</li>
+            <li>£1-2K/month in admin costs eliminated</li>
           </ul>
         </div>
 
         <div class="cap-card reveal reveal-delay-2">
           <div class="cap-icon">🤖</div>
-          <h3 class="cap-title">Technology Implementation</h3>
-          <p class="cap-body">Put AI and technology into daily work to drive revenue, speed, and margin expansion.</p>
+          <h3 class="cap-title">AI Lead Engine</h3>
+          <p class="cap-body">Scrapes, enriches, verifies, scores by ICP fit and intent, delivers qualified leads into your CRM daily with AI-written first touch.</p>
           <ul class="cap-bullets">
-            <li>Automate high-volume operations</li>
-            <li>Turn data into actionable signals</li>
-            <li>Embed tech inside current systems</li>
-            <li>Set access controls for safety</li>
+            <li>Consistent daily lead flow without manual effort</li>
+            <li>AI writes personalised first outreach per lead</li>
+            <li>Replaces £1-2K/month in VA or SDR costs</li>
           </ul>
         </div>
 
         <div class="cap-card reveal reveal-delay-3">
-          <div class="cap-icon">👥</div>
-          <h3 class="cap-title">Change Management &amp; Adoption</h3>
-          <p class="cap-body">Build operational capability that scales with your business and sticks.</p>
+          <div class="cap-icon">📈</div>
+          <h3 class="cap-title">Executive Intelligence Agent</h3>
+          <p class="cap-body">Pulls data from ClickUp and CRM, identifies trends, surfaces risks, writes weekly exec summaries, alerts on anomalies before you ask.</p>
           <ul class="cap-bullets">
-            <li>Process documentation</li>
-            <li>Training programmes</li>
-            <li>Knowledge transfer</li>
-            <li>Ongoing support</li>
+            <li>4-8 hours/week saved on manual reporting</li>
+            <li>AI-generated weekly summary delivered to Slack</li>
+            <li>Autonomous anomaly detection - revenue drops, churn risk</li>
+          </ul>
+        </div>
+
+        <div class="cap-card reveal reveal-delay-4">
+          <div class="cap-icon">❤️</div>
+          <h3 class="cap-title">Client Health Monitor</h3>
+          <p class="cap-body">Watches task completion, login frequency, Slack activity, scores engagement, flags churn risk 30 days before a client ghosts.</p>
+          <ul class="cap-bullets">
+            <li>Proactive churn alerts when engagement drops</li>
+            <li>Automated check-ins and AI-generated client updates</li>
+            <li>Saves 2-3 clients/year = £20K-£50K retained revenue</li>
           </ul>
         </div>
       </div>
@@ -1497,37 +1623,37 @@
         <!-- Left: Process -->
         <div>
           <div class="reveal">
-            <p class="section-label">Our Process</p>
-            <h2 class="section-title">Four steps.<br/>Zero chaos.</h2>
+            <p class="section-label">How It Works</p>
+            <h2 class="section-title">Four steps.<br/>Running in weeks.</h2>
           </div>
 
           <div class="process-steps">
             <div class="process-step reveal reveal-delay-1">
               <div class="step-num">01</div>
               <div class="step-content">
-                <h3 class="step-title">Assess</h3>
-                <p class="step-body">Analyse your current operations and identify exactly where revenue is leaking and where bottlenecks live.</p>
+                <h3 class="step-title">20-Min Operations Audit</h3>
+                <p class="step-body">We map where you're losing time and what to automate first. No pitch. No obligation. You leave with a clear picture of what's costing you most.</p>
               </div>
             </div>
             <div class="process-step reveal reveal-delay-2">
               <div class="step-num">02</div>
               <div class="step-content">
-                <h3 class="step-title">Design</h3>
-                <p class="step-body">Create a tailored digital transformation roadmap - no generic frameworks, no off-the-shelf guesses.</p>
+                <h3 class="step-title">System Design</h3>
+                <p class="step-body">We scope the build, define the intelligence layer, and confirm ROI. Every workflow and AI agent is designed around how your specific operation actually works.</p>
               </div>
             </div>
             <div class="process-step reveal reveal-delay-3">
               <div class="step-num">03</div>
               <div class="step-content">
-                <h3 class="step-title">Implement</h3>
-                <p class="step-body">Deploy solutions hands-on and ensure seamless integration with your existing stack and team.</p>
+                <h3 class="step-title">Build in 2-4 Weeks</h3>
+                <p class="step-body">You get a working AI-powered system in your existing tools. Eamonn leads every build directly - no account managers, no offshore delivery.</p>
               </div>
             </div>
             <div class="process-step reveal reveal-delay-4">
               <div class="step-num">04</div>
               <div class="step-content">
-                <h3 class="step-title">Stabilise</h3>
-                <p class="step-body">Optimise, measure results, and transfer capability so your team can run it independently.</p>
+                <h3 class="step-title">Handoff + Training</h3>
+                <p class="step-body">Your team runs it. We document everything and make sure the system is owned by your business. Ongoing support available if needed.</p>
               </div>
             </div>
           </div>
@@ -1536,25 +1662,25 @@
         <!-- Right: Results -->
         <div class="process-proof">
           <div class="proof-metric reveal">
-            <div class="metric-value">96.8<span>%</span></div>
-            <div class="metric-label">Of work delivered<br/>on scope</div>
+            <div class="metric-value">4<span>–8</span></div>
+            <div class="metric-label">Weeks to first<br/>live system</div>
           </div>
 
           <div class="proof-metric reveal reveal-delay-1">
-            <div class="metric-value">€1M<span>–€5M</span></div>
-            <div class="metric-label">Annual leakage<br/>recovered per client</div>
+            <div class="metric-value">100<span>%</span></div>
+            <div class="metric-label">Hands-on delivery.<br/>No outsourcing.</div>
           </div>
 
           <div class="proof-case reveal reveal-delay-2">
-            <div class="case-company">C11 Recovery Sports Ltd</div>
-            <p class="case-result">Zero systems. Just an idea. We built their entire revenue flow - lead capture → booking → payment → delivery - before volume hit.</p>
-            <p class="case-highlight">Launch-ready in weeks · Zero manual booking overhead · Built to scale</p>
+            <div class="case-company">Multiple Founder-Led Agencies · UK/Ireland</div>
+            <p class="case-result">Every new client required 5-10 hours of manual setup. We built an intelligent 3-workflow onboarding system: contract signed - AI generates ad copy drafts, creates client record, builds Slack channel, assigns all tasks. Zero manual intervention.</p>
+            <p class="case-highlight">5-10 hours → under 10 minutes · £1-2K/month VA costs eliminated · Same system, multiple agencies</p>
           </div>
 
           <div class="proof-case reveal reveal-delay-3">
             <div class="case-company">Cosy Cabins · ~$6M ARR</div>
-            <p class="case-result">Founder-run, spreadsheet chaos. We designed one operating system for the entire business. Close rate hit ~29%. MRR grew to ~$500k.</p>
-            <p class="case-highlight">Founder stepped out of daily admin · Business runs on systems, not messages</p>
+            <p class="case-result">Founder-run on spreadsheets. We built one AI-powered operating system for the entire business. Revenue Intelligence System scored and routed every lead automatically. Close rate went from 14% to 29%. Founder out of daily ops.</p>
+            <p class="case-highlight">Close rate: 14% → 29% · MRR: $0 → $500K · Founder out of daily admin</p>
           </div>
         </div>
       </div>
@@ -1570,7 +1696,7 @@
           <h2 class="section-title">We know<br/>your sector.</h2>
         </div>
         <p class="industries-header-right reveal reveal-delay-1">
-          We don't apply generic frameworks. Each industry has distinct workflows, compliance pressures, and margin dynamics. We design for yours.
+          Each industry has its own manual work problems. We've seen them all. We build the systems that fix them.
         </p>
       </div>
 
@@ -1579,9 +1705,9 @@
           <div class="ind-icon">💼</div>
           <h3 class="ind-title">Professional Services</h3>
           <ul class="ind-list">
-            <li>Streamlined client onboarding and project intake</li>
-            <li>Automated time tracking and billing workflows</li>
-            <li>Real-time capacity and utilisation dashboards</li>
+            <li>Onboarding new clients in minutes, not weeks</li>
+            <li>Billing workflows that capture every hour automatically</li>
+            <li>Utilisation dashboards so you always know who has capacity</li>
           </ul>
         </div>
 
@@ -1589,52 +1715,101 @@
           <div class="ind-icon">🔍</div>
           <h3 class="ind-title">Recruitment</h3>
           <ul class="ind-list">
-            <li>End-to-end candidate pipeline automation</li>
-            <li>Placement tracking with commission calculations</li>
-            <li>Client and candidate communication workflows</li>
+            <li>Candidate pipeline tracked without consultant admin</li>
+            <li>Automated communication so no candidate goes cold</li>
+            <li>Commission calculations done automatically at placement</li>
           </ul>
         </div>
 
         <div class="industry-card reveal reveal-delay-2">
-          <div class="ind-icon">🏗️</div>
-          <h3 class="ind-title">Construction</h3>
+          <div class="ind-icon">🏦</div>
+          <h3 class="ind-title">Lending &amp; Finance</h3>
           <ul class="ind-list">
-            <li>Project milestone and subcontractor tracking</li>
-            <li>Automated procurement and material ordering</li>
-            <li>Safety compliance and documentation systems</li>
+            <li>Underwriting workflows that cut cycle time from weeks to days</li>
+            <li>Compliance documentation with complete audit trails</li>
+            <li>Introducer and broker deal tracking in one system</li>
           </ul>
         </div>
 
         <div class="industry-card reveal reveal-delay-3">
-          <div class="ind-icon">🏦</div>
-          <h3 class="ind-title">Lending &amp; Finance</h3>
+          <div class="ind-icon">🏢</div>
+          <h3 class="ind-title">Property</h3>
           <ul class="ind-list">
-            <li>Motor, aviation, and private finance underwriting flows</li>
-            <li>Automated credit decisioning and risk scoring</li>
-            <li>Compliance documentation and audit trails</li>
+            <li>Tenant lifecycle managed without manual chasing</li>
+            <li>Maintenance tracked from request to resolution automatically</li>
+            <li>Rent arrears escalated before they become a problem</li>
           </ul>
         </div>
 
         <div class="industry-card reveal reveal-delay-4">
-          <div class="ind-icon">🏢</div>
-          <h3 class="ind-title">Property</h3>
-          <ul class="ind-list">
-            <li>Tenant lifecycle and lease management automation</li>
-            <li>Maintenance request and vendor coordination</li>
-            <li>Revenue and occupancy tracking dashboards</li>
-          </ul>
-        </div>
-
-        <div class="industry-card reveal reveal-delay-5">
           <div class="ind-icon">📣</div>
           <h3 class="ind-title">Agencies</h3>
           <ul class="ind-list">
-            <li>Client delivery and retainer management systems</li>
-            <li>Resource allocation and utilisation tracking</li>
-            <li>Automated reporting and client communications</li>
+            <li>Scope tracked and out-of-scope work flagged automatically</li>
+            <li>Utilisation visible before you accept the next brief</li>
+            <li>Monthly reports generated without anyone building them</li>
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-title">Transparent pricing.<br/>No enterprise sales theatre.</h2>
+      </div>
+      <table class="pricing-table reveal">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>What's Included</th>
+            <th>Investment</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tier-name">Operations Audit</span></td>
+            <td>Map all manual processes, identify top 3-5 systems to build, deliver prioritised roadmap with ROI estimates</td>
+            <td><span class="tier-price">£1,500 - £2,500</span></td>
+            <td><span class="tier-timeline">3-5 days</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-name">Single System Build</span></td>
+            <td>One intelligent system: onboarding, pipeline, lead engine, reporting, or client health</td>
+            <td><span class="tier-price">£3,000 - £6,000</span></td>
+            <td><span class="tier-timeline">2-3 weeks</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-name">AI Agent Layer</span></td>
+            <td>Custom intelligence: lead scoring, client health monitoring, margin tracking, content generation</td>
+            <td><span class="tier-price">£8,000 - £15,000</span></td>
+            <td><span class="tier-timeline">3-4 weeks</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-name">Two-System Build</span></td>
+            <td>Two connected systems (e.g. Revenue Intelligence + Onboarding Engine)</td>
+            <td><span class="tier-price">£7,000 - £12,000</span></td>
+            <td><span class="tier-timeline">4-5 weeks</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-name">Full Agency OS</span></td>
+            <td>All five systems end-to-end - intelligent lead-to-delivery-to-reporting backbone</td>
+            <td><span class="tier-price">£20,000 - £40,000</span></td>
+            <td><span class="tier-timeline">6-10 weeks</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-name">Monthly Retainer</span></td>
+            <td>Ongoing optimisation, new agents, system updates, maintenance</td>
+            <td><span class="tier-price">£1,500 - £3,000/mo</span></td>
+            <td><span class="tier-timeline">Ongoing</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="pricing-note reveal">All systems built in your existing tools. No forced migrations. No proprietary platforms you're locked into.</p>
     </div>
   </section>
 
@@ -1647,22 +1822,26 @@
       <div class="assessment-content reveal">
         <div class="assessment-tag">
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="currentColor"/></svg>
-          Free · No Obligation · 10 Minutes
+          Free · 12 Questions · No Obligation
         </div>
         <h2 class="assessment-title">
-          Find out where<br/>you're losing money.
+          Your business shouldn't<br/>need you in the middle.
         </h2>
+        <p class="assessment-cost-calc">
+          If your team spends 10 hours a week on work that should be automated, that's 520 hours a year.
+          At even £30/hr, that's £15,600 gone - before the deals that went cold, the renewals that were missed,
+          and the hires you made to solve process problems.
+        </p>
         <p class="assessment-body">
-          Take the free COREX Operations Assessment. We'll identify the exact operational gaps costing your business revenue - and show you how to fix them.
+          Book a 20-minute audit. We'll map what's eating your team's time and tell you what to build first. No pitch. No obligation.
         </p>
         <div class="assessment-ctas">
-          <a href="/assessment" class="btn-assess">
-            Take the Free Assessment
+          <a href="/assessment/" class="btn-assess">
+            Book Free Audit Call
             <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="/contact" class="btn-contact">Book a Discovery Call</a>
         </div>
-        <p class="assess-note">No credit card. No commitment. Just clarity.</p>
+        <p class="assess-note">Or email <a href="mailto:eamonn@corexoperations.com" style="color:var(--cyan); text-decoration:none;">eamonn@corexoperations.com</a> if you'd rather start there.</p>
       </div>
     </div>
   </section>
@@ -1676,21 +1855,20 @@
           <div class="footer-brand-logo">
             <img src="../corex-operate-strong/brand_assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
           </div>
-          <p>We install the operational systems ambitious businesses need to scale - without the chaos.</p>
+          <p>We build the automation and AI systems that let ambitious businesses run without manual work.</p>
           <span class="footer-tagline">corexoperations.com</span>
         </div>
 
         <div class="footer-col">
           <p class="footer-col-title">Useful Links</p>
           <ul>
-            <li><a href="/corex-landing/how-we-work/">How We Work</a></li>
-            <li><a href="/corex-landing/what-we-fix/">What We Fix</a></li>
-            <li><a href="/corex-landing/how-we-work/ai-in-operations/">AI in Operations</a></li>
-            <li><a href="/corex-landing/insights/">Insights</a></li>
-            <li><a href="/corex-landing/partnerships/">Partnerships</a></li>
-            <li><a href="/corex-landing/careers/">Careers</a></li>
-            <li><a href="/corex-landing/contact/">Contact</a></li>
-            <li><a href="/corex-landing/assessment/">Free Assessment</a></li>
+            <li><a href="/how-we-work/">How We Work</a></li>
+            <li><a href="/what-we-fix/">What We Fix</a></li>
+            <li><a href="/how-we-work/ai-in-operations/">AI in Operations</a></li>
+            <li><a href="/insights/">Insights</a></li>
+            <li><a href="/partnerships/">Partnerships</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/assessment/">Free Assessment</a></li>
           </ul>
         </div>
 

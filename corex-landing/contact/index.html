@@ -4,315 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - COREX Operations</title>
-  <meta name="description" content="Get in touch with COREX Operations. Book a discovery call, ask a question, or start the conversation about transforming your operations." />
+  <meta name="description" content="Tell us what you're trying to fix. We'll be in touch within one business day." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../shared/styles.css" />
   <style>
-
-    /* ─── Hero override - two-column editorial ──────────────── */
-    .contact-hero {
-      padding: 120px 28px 0;
-      text-align: left;
-      border-bottom: none;
-      overflow: visible;
-    }
-    .contact-hero .page-hero-bg {
-      background:
-        radial-gradient(ellipse 70% 120% at 20% 0%, rgba(0, 94, 183, 0.30) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(185, 250, 248, 0.04) 0%, transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-mid) 100%);
-    }
-    .contact-hero .grid-texture {
-      mask-image: radial-gradient(ellipse 80% 100% at 20% 0%, black 0%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 20% 0%, black 0%, transparent 100%);
-      opacity: 0.5;
-    }
-
-    .contact-hero-wrap {
-      position: relative;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: 1fr 480px;
-      gap: 60px;
-      align-items: start;
-      padding-bottom: 60px;
-    }
-
-    /* Left: big type */
-    .contact-hero-left {}
-
-    .contact-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-head);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--white-35);
-      margin-bottom: 28px;
-    }
-    .contact-breadcrumb a { color: var(--white-35); transition: color 0.2s; }
-    .contact-breadcrumb a:hover { color: var(--cyan); }
-    .contact-breadcrumb .sep { color: var(--white-12); }
-
-    .contact-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 13px;
-      border: 1px solid var(--bg-border);
-      border-radius: 100px;
-      font-family: var(--font-head);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 28px;
-    }
-    .contact-tag svg { color: var(--cyan); flex-shrink: 0; }
-
-    .contact-headline {
-      font-family: var(--font-head);
-      font-size: clamp(58px, 9vw, 128px);
-      font-weight: 900;
-      line-height: 0.88;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 32px;
-    }
-    .contact-headline .hl-accent {
-      display: block;
-      background: linear-gradient(90deg, var(--cyan) 0%, var(--light-blue) 60%, var(--blue-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .contact-subtext {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-60);
-      line-height: 1.7;
-      max-width: 440px;
-    }
-
-    /* Right: terminal status panel */
-    .contact-terminal {
-      background: rgba(10, 14, 30, 0.7);
-      border: 1px solid rgba(185,250,248,0.12);
-      border-radius: 16px;
-      padding: 0;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      margin-bottom: 60px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(185,250,248,0.04), 0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(185,250,248,0.08);
-    }
-    .contact-terminal::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(185,250,248,0.5) 40%, rgba(0,94,183,0.7) 60%, transparent 100%);
-      z-index: 1;
-    }
-    /* Scanline overlay */
-    .contact-terminal::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .terminal-topbar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 24px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative;
-      z-index: 2;
-    }
-    .tbar-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      flex-shrink: 0;
-    }
-    .tbar-dot.green { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.6); animation: dot-pulse 2.5s ease-in-out infinite; }
-    .tbar-dot.yellow { background: #f59e0b; box-shadow: 0 0 4px rgba(245,158,11,0.3); }
-    .tbar-dot.red { background: #ef4444; opacity: 0.6; }
-    @keyframes dot-pulse {
-      0%, 100% { box-shadow: 0 0 6px rgba(34,197,94,0.5); }
-      50% { box-shadow: 0 0 14px rgba(34,197,94,1), 0 0 28px rgba(34,197,94,0.3); }
-    }
-    .tbar-label {
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      color: var(--white-35);
-      letter-spacing: 0.06em;
-      margin-left: auto;
-    }
-    .tbar-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Courier New', monospace;
-      font-size: 10px;
-      color: #22c55e;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .tbar-status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      animation: dot-pulse 2s ease-in-out infinite;
-    }
-
-    .terminal-body {
-      padding: 20px 20px 20px;
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .terminal-section {
-      padding: 0 18px 0 0;
-      margin-right: 18px;
-      border-right: 1px solid rgba(255,255,255,0.06);
-    }
-    .terminal-section:nth-child(even) {
-      padding: 0 0 0 0;
-      margin-right: 0;
-      border-right: none;
-      padding-left: 18px;
-      margin-left: 0;
-    }
-    /* Top row separator */
-    .terminal-section:nth-child(1),
-    .terminal-section:nth-child(2) {
-      padding-bottom: 18px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .terminal-section-label {
-      font-family: 'Courier New', monospace;
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(185,250,248,0.55);
-      margin-bottom: 8px;
-    }
-
-    .terminal-line {
-      font-family: 'Courier New', monospace;
-      font-size: 11px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .tl-label { color: rgba(255,255,255,0.25); margin-right: 7px; }
-    .tl-active { color: #22c55e; font-weight: 600; }
-    .tl-cyan { color: var(--cyan); }
-    .tl-white { color: rgba(255,255,255,0.75); }
-    .tl-dim { color: rgba(255,255,255,0.45); }
-    .tl-blink {
-      display: inline-block;
-      width: 7px; height: 12px;
-      background: #22c55e;
-      vertical-align: middle;
-      margin-left: 3px;
-      animation: blink-cur 1s step-end infinite;
-    }
-    @keyframes blink-cur {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* Capability bars */
-    .cap-bars {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-top: 2px;
-    }
-    .cap-bar-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .cap-bar-name {
-      font-family: 'Courier New', monospace;
-      font-size: 10px;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.03em;
-      width: 105px;
-      flex-shrink: 0;
-    }
-    .cap-bar-track {
-      flex: 1;
-      height: 3px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .cap-bar-fill {
-      height: 100%;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      animation: bar-load 1.5s ease-out forwards;
-      transform-origin: left;
-    }
-    @keyframes bar-load {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
-    }
-    .cap-bar-pct {
-      font-family: 'Courier New', monospace;
-      font-size: 10px;
-      color: var(--cyan);
-      letter-spacing: 0.03em;
-      width: 32px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    /* Hero pulse line */
-    .hero-pulse-bar {
-      position: relative;
-      height: 1px;
-      background: var(--white-06);
-      overflow: hidden;
-      margin: 0 -28px;
-    }
-    .hero-pulse-bar::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -40%;
-      width: 40%; height: 100%;
-      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-      animation: pulse-sweep 5s ease-in-out infinite;
-    }
-    @keyframes pulse-sweep {
-      0% { left: -40%; }
-      100% { left: 140%; }
-    }
 
     /* ─── Main layout ──────────────────────────────────────── */
     .contact-body {
@@ -342,9 +39,9 @@
     }
     .module-num {
       font-family: var(--font-head);
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--cyan);
       background: rgba(185, 250, 248, 0.06);
@@ -355,9 +52,9 @@
     }
     .module-title {
       font-family: var(--font-head);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--white-35);
     }
@@ -466,7 +163,7 @@
       margin-left: auto;
     }
     .status-body {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--white-60);
       line-height: 1.65;
@@ -508,7 +205,7 @@
       margin-top: 4px;
     }
     .metric-desc {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--white-35);
       line-height: 1.6;
@@ -534,15 +231,15 @@
     .globe-content {}
     .globe-title {
       font-family: var(--font-head);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--white-80);
       margin-bottom: 6px;
     }
     .globe-body {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--white-60);
       line-height: 1.65;
@@ -564,7 +261,7 @@
       margin-bottom: 10px;
     }
     .assess-box-body {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--white-60);
       line-height: 1.65;
@@ -648,7 +345,7 @@
       margin-bottom: 10px;
     }
     .cal-meta-text {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--white-35);
       line-height: 1.6;
@@ -674,8 +371,6 @@
 
     /* ─── Responsive ──────────────────────────────────────── */
     @media (max-width: 960px) {
-      .contact-hero-wrap { grid-template-columns: 1fr; }
-      .contact-terminal { display: none; }
       .contact-body { grid-template-columns: 1fr; }
       .contact-sidebar { position: static; }
       .calendly-header-grid { grid-template-columns: 1fr; }
@@ -683,9 +378,7 @@
       .cal-meta-text { max-width: 100%; }
     }
     @media (max-width: 640px) {
-      .contact-hero { padding: 110px 20px 0; }
       .form-row { grid-template-columns: 1fr; }
-      .contact-headline { font-size: clamp(48px, 14vw, 72px); }
     }
 
   </style>
@@ -695,104 +388,34 @@
   <div id="nav-placeholder"></div>
 
   <!-- ─── Hero ─────────────────────────────────────────────── -->
-  <section class="page-hero contact-hero">
+  <section class="page-hero">
     <div class="page-hero-bg"></div>
     <div class="grid-texture"></div>
-    <div class="contact-hero-wrap" id="hero-content">
-
-      <!-- Left: editorial type -->
-      <div class="contact-hero-left">
-        <div class="contact-breadcrumb">
-          <a href="/corex-landing/">Home</a>
-          <span class="sep">/</span>
-          <span>Contact</span>
-        </div>
-        <div class="contact-tag">
-          <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><circle cx="3.5" cy="3.5" r="3" fill="currentColor"/></svg>
-          Open for Enquiries
-        </div>
-        <h1 class="contact-headline">
-          Let's<br/>
-          <span class="hl-accent">work.</span>
-        </h1>
-        <p class="contact-subtext">
-          Tell us about your business and what you're trying to fix - or book straight into the calendar below. Either way, we'll be in touch within one business day.
-        </p>
+    <div class="page-hero-content" id="hero-content">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <span>Contact</span>
       </div>
-
-      <!-- Right: terminal status -->
-      <div class="contact-terminal">
-        <div class="terminal-topbar">
-          <div class="tbar-dot red"></div>
-          <div class="tbar-dot yellow"></div>
-          <div class="tbar-dot green"></div>
-          <span class="tbar-label">corex-ops / channel-open</span>
-          <span class="tbar-status"><span class="tbar-status-dot"></span>live</span>
-        </div>
-        <div class="terminal-body">
-
-          <!-- Connection block -->
-          <div class="terminal-section">
-            <div class="terminal-section-label">// connection status</div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-active">STATUS: ACTIVE</span></div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-dim">LOC: </span><span class="tl-cyan">Dublin, Ireland</span></div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-dim">TZ: </span><span class="tl-white">IST · UTC+1</span></div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-dim">HRS: </span><span class="tl-white">Mon–Fri 09–18</span></div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-dim">SLA: </span><span class="tl-cyan">&lt; 24h</span></div>
-            <div class="terminal-line"><span class="tl-label">→</span><span class="tl-dim">MODE: </span><span class="tl-white">Remote &amp; On-site</span></div>
-          </div>
-
-          <!-- Partners block -->
-          <div class="terminal-section">
-            <div class="terminal-section-label">// certified partners</div>
-            <div class="terminal-line"><span class="tl-label">✓</span><span class="tl-cyan">Anthropic</span><span class="tl-dim"> - Claude AI</span></div>
-            <div class="terminal-line"><span class="tl-label">✓</span><span class="tl-cyan">HubSpot</span><span class="tl-dim"> - CRM &amp; RevOps</span></div>
-            <div class="terminal-line"><span class="tl-label">✓</span><span class="tl-cyan">Zapier</span><span class="tl-dim"> - Automation</span></div>
-            <div class="terminal-line"><span class="tl-label">✓</span><span class="tl-cyan">Make</span><span class="tl-dim"> - Workflows</span></div>
-            <div class="terminal-line"><span class="tl-label">✓</span><span class="tl-cyan">n8n</span><span class="tl-dim"> - AI Agents</span></div>
-          </div>
-
-          <!-- Capability bars -->
-          <div class="terminal-section">
-            <div class="terminal-section-label">// active capabilities</div>
-            <div class="cap-bars">
-              <div class="cap-bar-row">
-                <span class="cap-bar-name">AI Integration</span>
-                <div class="cap-bar-track"><div class="cap-bar-fill" style="width:96%;animation-delay:0.1s"></div></div>
-                <span class="cap-bar-pct">96%</span>
-              </div>
-              <div class="cap-bar-row">
-                <span class="cap-bar-name">Process Auto</span>
-                <div class="cap-bar-track"><div class="cap-bar-fill" style="width:100%;animation-delay:0.25s"></div></div>
-                <span class="cap-bar-pct">100%</span>
-              </div>
-              <div class="cap-bar-row">
-                <span class="cap-bar-name">CRM / HubSpot</span>
-                <div class="cap-bar-track"><div class="cap-bar-fill" style="width:98%;animation-delay:0.4s"></div></div>
-                <span class="cap-bar-pct">98%</span>
-              </div>
-              <div class="cap-bar-row">
-                <span class="cap-bar-name">Ops Transform</span>
-                <div class="cap-bar-track"><div class="cap-bar-fill" style="width:94%;animation-delay:0.55s"></div></div>
-                <span class="cap-bar-pct">94%</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Await block -->
-          <div class="terminal-section">
-            <div class="terminal-section-label">// transmission</div>
-            <div class="terminal-line" style="margin-bottom:10px;"><span class="tl-label">$</span><span class="tl-active">awaiting_input</span><span class="tl-blink"></span></div>
-            <div class="terminal-line"><span class="tl-dim">channel: </span><span class="tl-cyan">secure</span></div>
-            <div class="terminal-line"><span class="tl-dim">queue: </span><span class="tl-white">open</span></div>
-            <div class="terminal-line"><span class="tl-dim">clients: </span><span class="tl-active">accepting</span></div>
-          </div>
-
-        </div>
+      <div class="page-hero-tag">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><circle cx="3.5" cy="3.5" r="3" fill="currentColor"/></svg>
+        Open for Enquiries
       </div>
-
+      <h1 class="page-hero-title">
+        Let's talk<br/>
+        <span class="accent">operations.</span>
+      </h1>
+      <p class="page-hero-subtitle">
+        Tell us about your business and what you're trying to fix - or book straight into the calendar below. We'll be in touch within one business day.
+      </p>
+      <div class="page-hero-ctas">
+        <a href="/assessment/" class="btn-hero-primary">
+          Take the Free Assessment
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#calendly" class="btn-hero-secondary">Book a Discovery Call</a>
+      </div>
     </div>
-    <div class="hero-pulse-bar"></div>
   </section>
 
   <!-- ─── Contact Form + Sidebar ───────────────────────────── -->
@@ -802,7 +425,8 @@
 
         <!-- ── Form ── -->
         <div class="reveal">
-          <form>
+          <form id="contact-form">
+            <input type="hidden" name="_subject" value="New COREX Enquiry" />
 
             <!-- Module 01: Identity -->
             <div class="form-module">
@@ -814,25 +438,25 @@
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">First Name</label>
-                  <input type="text" class="form-input" placeholder="Jane" />
+                  <input type="text" name="first_name" class="form-input" placeholder="Jane" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Last Name</label>
-                  <input type="text" class="form-input" placeholder="Smith" />
+                  <input type="text" name="last_name" class="form-input" placeholder="Smith" />
                 </div>
               </div>
               <div class="form-group">
                 <label class="form-label">Work Email</label>
-                <input type="email" class="form-input" placeholder="jane@company.com" />
+                <input type="email" name="email" class="form-input" placeholder="jane@company.com" required />
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">Company</label>
-                  <input type="text" class="form-input" placeholder="Acme Ltd" />
+                  <input type="text" name="company" class="form-input" placeholder="Acme Ltd" />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Phone (Optional)</label>
-                  <input type="tel" class="form-input" placeholder="+44 7700 000000" />
+                  <input type="tel" name="phone" class="form-input" placeholder="+44 7700 000000" />
                 </div>
               </div>
             </div>
@@ -846,7 +470,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">What are you looking to achieve?</label>
-                <select class="form-select">
+                <select name="topic" class="form-select">
                   <option value="">Select a topic...</option>
                   <option>Operational audit &amp; diagnosis</option>
                   <option>Process automation &amp; integration</option>
@@ -859,7 +483,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Tell us about your business and what you want to fix</label>
-                <textarea class="form-textarea" style="min-height:180px;" placeholder="E.g. We're a 20-person recruitment firm. Our biggest problem is that leads fall through the cracks between sales and delivery, and we have no real visibility on what's happening..."></textarea>
+                <textarea name="message" class="form-textarea" style="min-height:180px;" placeholder="What's eating your team's time right now?"></textarea>
               </div>
             </div>
 
@@ -872,7 +496,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">How did you hear about us?</label>
-                <select class="form-select">
+                <select name="source" class="form-select">
                   <option value="">Select...</option>
                   <option>LinkedIn</option>
                   <option>Google Search</option>
@@ -885,11 +509,11 @@
               </div>
             </div>
 
-            <button type="submit" class="btn-transmit">
+            <button type="submit" id="contact-submit-btn" class="btn-transmit">
               Send Transmission
               <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <p style="text-align:center; margin-top:14px; font-size:11px; font-weight:300; color:var(--white-35); letter-spacing:0.04em;">
+            <p id="contact-form-status" style="text-align:center; margin-top:14px; font-size:14px; font-weight:300; color:var(--white-35); letter-spacing:0.02em;">
               We respond to all enquiries within 1 business day.
             </p>
 
@@ -931,7 +555,7 @@
           <div class="assess-box reveal reveal-delay-3">
             <p class="assess-box-label">Not sure where to start?</p>
             <p class="assess-box-body">Take the free 12-question Operations Assessment and we'll diagnose your situation before we even speak.</p>
-            <a href="/corex-landing/assessment/" class="assess-box-link">
+            <a href="/assessment/" class="assess-box-link">
               Take the Free Assessment
               <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -979,5 +603,37 @@
 
   <div id="footer-placeholder"></div>
   <script src="../shared/site.js"></script>
+  <script>
+    (function () {
+      var form   = document.getElementById('contact-form');
+      var btn    = document.getElementById('contact-submit-btn');
+      var status = document.getElementById('contact-form-status');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        status.textContent = '';
+        // EmailJS sendForm maps each input[name] directly to template variables
+        // Template variables available: {{first_name}}, {{last_name}}, {{email}},
+        //   {{company}}, {{phone}}, {{topic}}, {{message}}, {{source}}
+        loadEmailJS(function () {
+          window.emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACT, form)
+            .then(function () {
+              form.reset();
+              btn.textContent = '✓ Sent - we\'ll be in touch within 24 hours. If it\'s urgent, book directly above.';
+              status.style.color = 'var(--cyan)';
+              status.textContent = '';
+            })
+            .catch(function () {
+              btn.disabled = false;
+              btn.textContent = 'Send Transmission';
+              status.style.color = '#f87171';
+              status.textContent = 'Something went wrong. Email eamonn@corexoperations.com directly.';
+            });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
