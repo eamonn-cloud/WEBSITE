@@ -8,7 +8,7 @@
     <div class="container nav-inner">
       <a href="/" class="nav-logo">
         <img
-          src="/corex-landing/assets/COREX-21.svg"
+          src="/assets/COREX-21.svg"
           alt="COREX Operations"
           class="nav-logo-img"
         />
@@ -77,7 +77,7 @@
 
         <div class="footer-brand">
           <div class="footer-brand-logo">
-            <img src="/corex-landing/assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
+            <img src="/assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
           </div>
           <p>We build the automation and AI systems that let ambitious businesses run without manual work.</p>
           <span class="footer-tagline">corexoperations.com</span>
