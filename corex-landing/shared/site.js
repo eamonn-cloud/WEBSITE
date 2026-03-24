@@ -8,7 +8,7 @@
     <div class="container nav-inner">
       <a href="/" class="nav-logo">
         <img
-          src="/assets/COREX-21.svg"
+          src="/corex-landing/assets/COREX-21.svg"
           alt="COREX Operations"
           class="nav-logo-img"
         />
@@ -77,7 +77,7 @@
 
         <div class="footer-brand">
           <div class="footer-brand-logo">
-            <img src="/assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
+            <img src="/corex-landing/assets/COREX-21.svg" alt="COREX Operations" class="footer-logo-img" />
           </div>
           <p>We build the automation and AI systems that let ambitious businesses run without manual work.</p>
           <span class="footer-tagline">corexoperations.com</span>
@@ -106,15 +106,15 @@
               </a>
             </li>
             <li>
-              <a href="#" aria-label="X / Twitter">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <span>Twitter (X)</span>
+              <a href="https://www.instagram.com/corexoperations" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span>Instagram</span>
               </a>
             </li>
             <li>
-              <a href="#" aria-label="Instagram">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-                <span>Instagram</span>
+              <a href="https://calendly.com/eamonn-corexoperations/30min" target="_blank" rel="noopener" aria-label="Book a Call">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <span>Book a Call</span>
               </a>
             </li>
           </ul>

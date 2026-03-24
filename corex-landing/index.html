@@ -26,13 +26,14 @@
       --blue-light:   #3382cc;
       --steel:        #4B5964;
 
-      /* Background spectrum - deep navy */
-      --bg:           #040f3d;
-      --bg-mid:       #051244;
-      --bg-card:      #071558;
-      --bg-card-2:    #081a6a;
-      --bg-border:    rgba(0, 94, 183, 0.18);
-      --bg-border-lg: rgba(0, 94, 183, 0.10);
+      /* Background spectrum - deep dark, clean */
+      --bg:           #020b18;
+      --bg-mid:       #04101e;
+      --bg-card:      #061828;
+      --bg-card-2:    #092035;
+      --bg-border:    rgba(255, 255, 255, 0.10);
+      --bg-border-lg: rgba(255, 255, 255, 0.07);
+      --bg-border-hover: rgba(255, 255, 255, 0.18);
 
       /* Accents */
       --cyan:         #B9FAF8;
@@ -53,16 +54,10 @@
       --font-body:    'Poppins', sans-serif;
     }
 
-    /* Grid lives on html - always rendered, never blocked by body background */
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: none;
       background-color: var(--bg);
-      background-image:
-        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
-      background-size: 96px 96px;
-      background-attachment: fixed;
     }
 
     body {
@@ -123,11 +118,11 @@
       border-bottom: 1px solid var(--bg-border-lg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      background: rgba(4, 15, 61, 0.85);
+      background: rgba(2, 11, 24, 0.85);
       transition: background 0.3s, border-color 0.3s;
     }
     .nav.scrolled {
-      background: rgba(4, 15, 61, 0.97);
+      background: rgba(2, 11, 24, 0.97);
       border-bottom-color: var(--bg-border);
     }
 
@@ -515,7 +510,7 @@
       padding: 36px 0;
       border-top: 1px solid var(--white-06);
       border-bottom: 1px solid var(--white-06);
-      background: rgba(4, 15, 61, 0.6);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .cert-inner {
@@ -610,12 +605,17 @@
       padding: 100px 0;
       position: relative;
       overflow: hidden;
+      background: rgba(255,255,255,0.025);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .capabilities-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,94,183,0.12) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 50%, rgba(0,94,183,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 50%, rgba(0,60,140,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -632,16 +632,17 @@
     }
 
     .cap-card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-border-lg);
-      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
       padding: 32px 28px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
     }
     .cap-card:hover {
-      border-color: var(--bg-border);
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
       transform: translateY(-4px);
     }
     .cap-card::after {
@@ -658,8 +659,8 @@
     .cap-icon {
       width: 44px; height: 44px;
       border-radius: 10px;
-      background: rgba(0, 94, 183, 0.15);
-      border: 1px solid var(--bg-border);
+      background: rgba(0, 94, 183, 0.18);
+      border: 1px solid rgba(0, 94, 183, 0.35);
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 20px;
       font-size: 20px;
@@ -710,8 +711,16 @@
     /* ─── Process Section ────────────────────────────────── */
     .section-process {
       padding: 100px 0;
-      border-top: 1px solid var(--white-06);
+      border-top: 1px solid rgba(255,255,255,0.06);
       position: relative;
+      overflow: hidden;
+    }
+    .section-process::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 40% 60% at 90% 50%, rgba(0,94,183,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .process-layout {
@@ -748,8 +757,8 @@
     .step-num {
       width: 40px; height: 40px;
       border-radius: 50%;
-      border: 1px solid var(--bg-border);
-      background: var(--bg-card);
+      border: 1px solid rgba(0, 94, 183, 0.35);
+      background: rgba(0, 94, 183, 0.12);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-head);
       font-size: 12px;
@@ -860,6 +869,9 @@
     /* ─── Industries Section ─────────────────────────────── */
     .section-industries {
       padding: 100px 0;
+      background: rgba(255,255,255,0.025);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       border-top: 1px solid var(--white-06);
       position: relative;
     }
@@ -1148,7 +1160,7 @@
 
     /* ─── Footer ─────────────────────────────────────────── */
     .footer {
-      background-color: #030d36;
+      background-color: #010810;
       padding: 72px 0 36px;
       border-top: none;
     }
@@ -1478,7 +1490,7 @@
 
       <div class="hero-ctas">
         <a href="/assessment/" class="btn-hero-primary">
-          Book a Free 20-Min Operations Audit
+          Book a Free Operations Audit
           <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1500,19 +1512,19 @@
         <div class="cert-divider"></div>
         <div class="cert-logos">
           <a href="http://verify.skilljar.com/c/33zxvk9yfmzj" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/assets/badges/claude-badge.png" alt="Anthropic" /></div>
+            <div class="cert-icon"><img src="/corex-landing/assets/badges/claude-badge.png" alt="Anthropic" /></div>
             Anthropic · Claude
           </a>
           <a href="https://zapier.com/partnerdirectory/corex-operations" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/assets/badges/zapier-badge.png" alt="Zapier" /></div>
+            <div class="cert-icon"><img src="/corex-landing/assets/badges/zapier-badge.png" alt="Zapier" /></div>
             Zapier Solutions Partner
           </a>
           <a href="https://ecosystem.hubspot.com/marketplace/solutions/corex-operations" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/assets/badges/hubspot-badge.png" alt="HubSpot" /></div>
+            <div class="cert-icon"><img src="/corex-landing/assets/badges/hubspot-badge.png" alt="HubSpot" /></div>
             HubSpot Solutions Partner
           </a>
           <a href="https://www.credly.com/badges/6ebeffe5-6eea-49a7-9ec2-37dd7aacdc79/public_url" class="cert-item" target="_blank" rel="noopener">
-            <div class="cert-icon"><img src="/assets/badges/pmp-badge.png" alt="PMI PMP" /></div>
+            <div class="cert-icon"><img src="/corex-landing/assets/badges/pmp-badge.png" alt="PMI PMP" /></div>
             PMI PMP Certified
           </a>
         </div>
@@ -1529,17 +1541,17 @@
       </div>
       <div class="capabilities-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="cap-card reveal">
-          <div class="cap-icon">😓</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" stroke="currentColor" stroke-width="1.8"/><path d="M12 14c-5 0-8 2-8 4v1h16v-1c0-2-3-4-8-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 11l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 class="cap-title">Manual Work</h3>
           <p class="cap-body">Your team is the system. Everything stops when they're gone. Every new client, every report, every handoff requires a human in the middle.</p>
         </div>
         <div class="cap-card reveal reveal-delay-1">
-          <div class="cap-icon">⚡</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2L4.5 13.5H12l-1 8.5 8.5-11.5H12l1-8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 2l20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <h3 class="cap-title">Dumb Automation</h3>
           <p class="cap-body">You have Zapier workflows. They break when anything changes. Someone still has to watch them. You automated the task but not the thinking.</p>
         </div>
         <div class="cap-card reveal reveal-delay-2">
-          <div class="cap-icon">🤖</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="8" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M12 8V5m0-3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="14" r="1.5" fill="currentColor"/><circle cx="16" cy="14" r="1.5" fill="currentColor"/><path d="M8 18h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2 12h2M20 12h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <h3 class="cap-title">Intelligent Systems</h3>
           <p class="cap-body">AI agents that adapt, make decisions, flag exceptions, and operate autonomously. This is where COREX builds.</p>
         </div>
@@ -1559,7 +1571,7 @@
 
       <div class="capabilities-grid">
         <div class="cap-card reveal">
-          <div class="cap-icon">🚀</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C7 7 7 12 12 22c5-10 5-15 0-20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 13c-3 1-4 3-4 4l3-1M17 13c3 1 4 3 4 4l-3-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <h3 class="cap-title">Intelligent Onboarding Engine</h3>
           <p class="cap-body">Client signs - AI generates personalised onboarding plan, auto-assigns team based on client profile, monitors setup completion, escalates blockers to Slack.</p>
           <ul class="cap-bullets">
@@ -1570,7 +1582,7 @@
         </div>
 
         <div class="cap-card reveal reveal-delay-1">
-          <div class="cap-icon">📊</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="12" width="4" height="9" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="7" width="4" height="14" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="17" y="3" width="4" height="18" rx="1" stroke="currentColor" stroke-width="1.8"/></svg></div>
           <h3 class="cap-title">Revenue Intelligence System</h3>
           <p class="cap-body">AI scores leads in real-time, auto-routes by intent signals, predicts close probability, surfaces at-risk deals, writes follow-up sequences.</p>
           <ul class="cap-bullets">
@@ -1581,7 +1593,7 @@
         </div>
 
         <div class="cap-card reveal reveal-delay-2">
-          <div class="cap-icon">🤖</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 class="cap-title">AI Lead Engine</h3>
           <p class="cap-body">Scrapes, enriches, verifies, scores by ICP fit and intent, delivers qualified leads into your CRM daily with AI-written first touch.</p>
           <ul class="cap-bullets">
@@ -1592,7 +1604,7 @@
         </div>
 
         <div class="cap-card reveal reveal-delay-3">
-          <div class="cap-icon">📈</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17 6 23 6 23 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 class="cap-title">Executive Intelligence Agent</h3>
           <p class="cap-body">Pulls data from ClickUp and CRM, identifies trends, surfaces risks, writes weekly exec summaries, alerts on anomalies before you ask.</p>
           <ul class="cap-bullets">
@@ -1603,7 +1615,7 @@
         </div>
 
         <div class="cap-card reveal reveal-delay-4">
-          <div class="cap-icon">❤️</div>
+          <div class="cap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
           <h3 class="cap-title">Client Health Monitor</h3>
           <p class="cap-body">Watches task completion, login frequency, Slack activity, scores engagement, flags churn risk 30 days before a client ghosts.</p>
           <ul class="cap-bullets">
@@ -1882,15 +1894,15 @@
               </a>
             </li>
             <li>
-              <a href="#">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <span>Twitter (X)</span>
+              <a href="https://www.instagram.com/corexoperations" target="_blank" rel="noopener">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span>Instagram</span>
               </a>
             </li>
             <li>
-              <a href="#">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-                <span>Instagram</span>
+              <a href="https://calendly.com/eamonn-corexoperations/30min" target="_blank" rel="noopener">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <span>Book a Call</span>
               </a>
             </li>
           </ul>

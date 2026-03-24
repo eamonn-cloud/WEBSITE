@@ -14,67 +14,33 @@
     /* ─── Main layout ──────────────────────────────────────── */
     .contact-body {
       display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 80px;
+      grid-template-columns: 1fr 360px;
+      gap: 64px;
       align-items: start;
     }
 
-    /* ─── Form modules ────────────────────────────────────── */
-    .form-module {
-      margin-bottom: 36px;
-      padding-bottom: 36px;
+    /* ─── Form sections ───────────────────────────────────── */
+    .form-section {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
       border-bottom: 1px solid var(--white-06);
     }
-    .form-module:last-of-type {
+    .form-section:last-of-type {
       border-bottom: none;
       margin-bottom: 24px;
       padding-bottom: 0;
     }
-
-    .form-module-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-    .module-num {
+    .form-section-title {
       font-family: var(--font-head);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      background: rgba(185, 250, 248, 0.06);
-      border: 1px solid rgba(185, 250, 248, 0.15);
-      border-radius: 4px;
-      padding: 4px 10px;
-      flex-shrink: 0;
-    }
-    .module-title {
-      font-family: var(--font-head);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--white-35);
-    }
-    .module-rule {
-      flex: 1;
-      height: 1px;
-      background: var(--white-06);
+      margin-bottom: 20px;
     }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    /* Enhanced focus states */
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      outline: none;
-      border-color: rgba(0, 94, 183, 0.7);
-      box-shadow: 0 0 0 3px rgba(0, 94, 183, 0.12), inset 2px 0 0 var(--blue);
-      background: rgba(0, 94, 183, 0.06);
-    }
 
     /* Submit button */
     .btn-transmit {
@@ -96,22 +62,13 @@
       color: var(--white);
       cursor: pointer;
       overflow: hidden;
-      transition: all 0.3s;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       margin-top: 8px;
     }
-    .btn-transmit::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-      transition: left 0.5s;
-    }
-    .btn-transmit:hover::before { left: 100%; }
     .btn-transmit:hover {
       background: var(--blue-hover);
       transform: translateY(-2px);
-      box-shadow: 0 16px 48px rgba(0, 94, 183, 0.45);
+      box-shadow: 0 16px 48px rgba(0, 94, 183, 0.35);
     }
     .btn-transmit svg { flex-shrink: 0; }
 
@@ -119,196 +76,70 @@
     .contact-sidebar {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       position: sticky;
       top: 96px;
     }
-
-    .status-card {
-      background: rgba(34, 197, 94, 0.04);
-      border: 1px solid rgba(34, 197, 94, 0.18);
-      border-radius: 12px;
-      padding: 22px 24px;
+    .contact-sidebar .info-card {
+      padding: 20px 22px;
     }
-    .status-card-top {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 12px;
+    .sidebar-label {
+      font-family: var(--font-head);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      margin-bottom: 8px;
+    }
+    .sidebar-value {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white-80);
+      margin-bottom: 6px;
+    }
+    .sidebar-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-45);
+      line-height: 1.6;
     }
     .live-dot {
-      width: 8px; height: 8px;
+      display: inline-block;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: #22c55e;
-      flex-shrink: 0;
+      margin-right: 8px;
+      vertical-align: middle;
       box-shadow: 0 0 8px rgba(34,197,94,0.5);
       animation: live-pulse 2.5s ease-in-out infinite;
     }
     @keyframes live-pulse {
       0%, 100% { box-shadow: 0 0 6px rgba(34,197,94,0.4); }
-      50% { box-shadow: 0 0 14px rgba(34,197,94,0.8), 0 0 28px rgba(34,197,94,0.2); }
+      50% { box-shadow: 0 0 14px rgba(34,197,94,0.8); }
     }
-    .live-label {
-      font-family: var(--font-head);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #22c55e;
-    }
-    .live-since {
-      font-family: 'Courier New', monospace;
-      font-size: 9px;
-      color: rgba(34,197,94,0.5);
-      margin-left: auto;
-    }
-    .status-body {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-60);
-      line-height: 1.65;
-    }
-
-    .metric-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--bg-border-lg);
-      border-radius: 12px;
-      padding: 22px 24px;
-      display: flex;
-      align-items: baseline;
-      gap: 0;
-    }
-    .metric-left {
-      flex: 1;
-    }
-    .metric-value {
-      font-family: var(--font-head);
-      font-size: 54px;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--white);
-    }
-    .metric-unit {
-      font-family: var(--font-head);
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--cyan);
-    }
-    .metric-label {
-      font-family: var(--font-head);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--white-35);
-      margin-top: 4px;
-    }
-    .metric-desc {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--white-35);
-      line-height: 1.6;
-      max-width: 120px;
-      text-align: right;
-    }
-
-    .globe-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--bg-border-lg);
-      border-radius: 12px;
-      padding: 22px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-    .globe-icon {
-      font-size: 22px;
-      flex-shrink: 0;
-      line-height: 1;
-      margin-top: 2px;
-    }
-    .globe-content {}
-    .globe-title {
-      font-family: var(--font-head);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--white-80);
-      margin-bottom: 6px;
-    }
-    .globe-body {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-60);
-      line-height: 1.65;
-    }
-
-    .assess-box {
-      background: linear-gradient(135deg, rgba(0, 94, 183, 0.10), rgba(185, 250, 248, 0.04));
-      border: 1px solid rgba(0, 94, 183, 0.25);
-      border-radius: 12px;
-      padding: 22px 24px;
-    }
-    .assess-box-label {
-      font-family: var(--font-head);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 10px;
-    }
-    .assess-box-body {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-60);
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-    .assess-box-link {
+    .sidebar-link {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       font-family: var(--font-head);
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--cyan);
+      margin-top: 12px;
       transition: gap 0.2s;
     }
-    .assess-box-link:hover { gap: 11px; }
-    .assess-box-link svg { flex-shrink: 0; }
+    .sidebar-link:hover { gap: 10px; }
 
     /* ─── Calendly section ────────────────────────────────── */
     .calendly-section {
       padding: 80px 0 100px;
       border-top: 1px solid var(--white-06);
     }
-    .calendly-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-    .cal-rule {
-      flex: 1;
-      height: 1px;
-      background: var(--white-06);
-    }
-    .cal-eyebrow-label {
-      font-family: var(--font-head);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--white-35);
-      white-space: nowrap;
-    }
-
-    .calendly-header-grid {
+    .cal-header {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: end;
@@ -325,16 +156,14 @@
       color: var(--white);
     }
     .cal-headline span { color: var(--cyan); }
-    .cal-meta {
-      text-align: right;
-    }
+    .cal-meta { text-align: right; }
     .cal-meta-badge {
       display: inline-flex;
       align-items: center;
       gap: 7px;
       padding: 6px 14px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid var(--bg-border-lg);
+      border: 1px solid var(--white-06);
       border-radius: 100px;
       font-family: var(--font-head);
       font-size: 9px;
@@ -345,35 +174,24 @@
       margin-bottom: 10px;
     }
     .cal-meta-text {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--white-35);
       line-height: 1.6;
-      max-width: 260px;
+      max-width: 240px;
     }
-
     .calendly-frame {
       background: rgba(255,255,255,0.02);
-      border: 1px solid var(--bg-border-lg);
+      border: 1px solid var(--white-06);
       border-radius: 16px;
       overflow: hidden;
-      position: relative;
-    }
-    .calendly-frame::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(185,250,248,0.2), transparent);
-      pointer-events: none;
-      z-index: 1;
     }
 
     /* ─── Responsive ──────────────────────────────────────── */
     @media (max-width: 960px) {
       .contact-body { grid-template-columns: 1fr; }
       .contact-sidebar { position: static; }
-      .calendly-header-grid { grid-template-columns: 1fr; }
+      .cal-header { grid-template-columns: 1fr; }
       .cal-meta { text-align: left; }
       .cal-meta-text { max-width: 100%; }
     }
@@ -428,13 +246,9 @@
           <form id="contact-form">
             <input type="hidden" name="_subject" value="New COREX Enquiry" />
 
-            <!-- Module 01: Identity -->
-            <div class="form-module">
-              <div class="form-module-header">
-                <span class="module-num">01</span>
-                <span class="module-title">Identity</span>
-                <div class="module-rule"></div>
-              </div>
+            <!-- Section: Identity -->
+            <div class="form-section">
+              <p class="form-section-title">Your Details</p>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">First Name</label>
@@ -461,13 +275,9 @@
               </div>
             </div>
 
-            <!-- Module 02: Brief -->
-            <div class="form-module">
-              <div class="form-module-header">
-                <span class="module-num">02</span>
-                <span class="module-title">The Brief</span>
-                <div class="module-rule"></div>
-              </div>
+            <!-- Section: Brief -->
+            <div class="form-section">
+              <p class="form-section-title">What You're Working On</p>
               <div class="form-group">
                 <label class="form-label">What are you looking to achieve?</label>
                 <select name="topic" class="form-select">
@@ -487,13 +297,9 @@
               </div>
             </div>
 
-            <!-- Module 03: Source -->
-            <div class="form-module">
-              <div class="form-module-header">
-                <span class="module-num">03</span>
-                <span class="module-title">Source</span>
-                <div class="module-rule"></div>
-              </div>
+            <!-- Section: Source -->
+            <div class="form-section">
+              <p class="form-section-title">How You Found Us</p>
               <div class="form-group">
                 <label class="form-label">How did you hear about us?</label>
                 <select name="source" class="form-select">
@@ -524,38 +330,33 @@
         <div class="contact-sidebar">
 
           <!-- Live status -->
-          <div class="status-card reveal">
-            <div class="status-card-top">
-              <div class="live-dot"></div>
-              <span class="live-label">Channel Open</span>
-              <span class="live-since">Mon–Fri 9–6 IST</span>
-            </div>
-            <p class="status-body">We're actively taking on new clients. Enquiries sent today are typically reviewed and replied to within one business day.</p>
+          <div class="info-card reveal">
+            <p class="sidebar-label"><span class="live-dot"></span>Currently Taking Enquiries</p>
+            <p class="sidebar-value">Mon–Fri · 9am–6pm IST</p>
+            <p class="sidebar-body">We're actively taking on new clients. Every enquiry is reviewed and replied to within one business day.</p>
           </div>
 
-          <!-- 24H metric -->
-          <div class="metric-card reveal reveal-delay-1">
-            <div class="metric-left">
-              <div class="metric-value">24<span class="metric-unit">H</span></div>
-              <div class="metric-label">Response Guarantee</div>
-            </div>
-            <div class="metric-desc">Every enquiry reviewed and replied to within one business day.</div>
+          <!-- Response time -->
+          <div class="info-card reveal reveal-delay-1">
+            <p class="sidebar-label">Response Time</p>
+            <p class="sidebar-value">Within 24 Hours</p>
+            <p class="sidebar-body">If we can help, we'll tell you exactly how. If we can't, we'll tell you that too.</p>
           </div>
 
           <!-- Location -->
-          <div class="globe-card reveal reveal-delay-2">
-            <div class="globe-icon">🌍</div>
-            <div class="globe-content">
-              <div class="globe-title">Ireland. Working Globally.</div>
-              <p class="globe-body">We work with clients across Ireland, the UK, Europe, and beyond. All engagements delivered remotely or on-site.</p>
+          <div class="info-card reveal reveal-delay-2">
+            <div class="info-card-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
+            <h3 class="info-card-title">Ireland. Working Globally.</h3>
+            <p class="info-card-body">We work with clients across Ireland, the UK, Europe, and beyond. All engagements delivered remotely or on-site.</p>
           </div>
 
           <!-- Assessment CTA -->
-          <div class="assess-box reveal reveal-delay-3">
-            <p class="assess-box-label">Not sure where to start?</p>
-            <p class="assess-box-body">Take the free 12-question Operations Assessment and we'll diagnose your situation before we even speak.</p>
-            <a href="/assessment/" class="assess-box-link">
+          <div class="info-card reveal reveal-delay-3">
+            <p class="sidebar-label">Not sure where to start?</p>
+            <p class="sidebar-body">Take the free 12-question Operations Assessment and we'll diagnose your situation before we even speak.</p>
+            <a href="/assessment/" class="sidebar-link">
               Take the Free Assessment
               <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -570,13 +371,11 @@
   <section class="calendly-section">
     <div class="container">
 
-      <div class="calendly-eyebrow reveal">
-        <div class="cal-rule"></div>
-        <span class="cal-eyebrow-label">- Or skip straight to booking -</span>
-        <div class="cal-rule"></div>
+      <div class="section-header reveal" style="margin-bottom:40px;">
+        <p class="section-label">Or Skip Straight to Booking</p>
       </div>
 
-      <div class="calendly-header-grid reveal">
+      <div class="cal-header reveal">
         <div>
           <h2 class="cal-headline">
             Pick a slot<br/>
