@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp -r corex-landing/shared dist/shared && cp -r corex-landing/assets dist/assets",
+    "build": "vite build && cp -r corex-landing/shared dist/shared && cp -r corex-landing/assets/. dist/assets/",
     "preview": "vite preview"
   },
   "devDependencies": {
