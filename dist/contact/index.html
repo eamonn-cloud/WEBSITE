@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - COREX Operations</title>
+  <meta name="description" content="Tell us what you're trying to fix. We'll be in touch within one business day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ─── Main layout ──────────────────────────────────────── */
+    .contact-body {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ─── Form sections ───────────────────────────────────── */
+    .form-section {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--white-06);
+    }
+    .form-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 24px;
+      padding-bottom: 0;
+    }
+    .form-section-title {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      margin-bottom: 20px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Submit button */
+    .btn-transmit {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 18px 40px;
+      background: var(--blue);
+      border: 1px solid rgba(51, 130, 204, 0.5);
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+    .btn-transmit:hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(0, 94, 183, 0.35);
+    }
+    .btn-transmit svg { flex-shrink: 0; }
+
+    /* ─── Sidebar ─────────────────────────────────────────── */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: sticky;
+      top: 96px;
+    }
+    .contact-sidebar .info-card {
+      padding: 20px 22px;
+    }
+    .sidebar-label {
+      font-family: var(--font-head);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      margin-bottom: 8px;
+    }
+    .sidebar-value {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white-80);
+      margin-bottom: 6px;
+    }
+    .sidebar-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-45);
+      line-height: 1.6;
+    }
+    .live-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      margin-right: 8px;
+      vertical-align: middle;
+      box-shadow: 0 0 8px rgba(34,197,94,0.5);
+      animation: live-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%, 100% { box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 0 14px rgba(34,197,94,0.8); }
+    }
+    .sidebar-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-top: 12px;
+      transition: gap 0.2s;
+    }
+    .sidebar-link:hover { gap: 10px; }
+
+    /* ─── Calendly section ────────────────────────────────── */
+    .calendly-section {
+      padding: 80px 0 100px;
+      border-top: 1px solid var(--white-06);
+    }
+    .cal-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .cal-headline {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .cal-headline span { color: var(--cyan); }
+    .cal-meta { text-align: right; }
+    .cal-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--white-06);
+      border-radius: 100px;
+      font-family: var(--font-head);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-35);
+      margin-bottom: 10px;
+    }
+    .cal-meta-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white-35);
+      line-height: 1.6;
+      max-width: 240px;
+    }
+    .calendly-frame {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--white-06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* ─── Responsive ──────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .contact-body { grid-template-columns: 1fr; }
+      .contact-sidebar { position: static; }
+      .cal-header { grid-template-columns: 1fr; }
+      .cal-meta { text-align: left; }
+      .cal-meta-text { max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/styles-1RwY85HV.css">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- ─── Hero ─────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="grid-texture"></div>
+    <div class="page-hero-content" id="hero-content">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <span>Contact</span>
+      </div>
+      <div class="page-hero-tag">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><circle cx="3.5" cy="3.5" r="3" fill="currentColor"/></svg>
+        Open for Enquiries
+      </div>
+      <h1 class="page-hero-title">
+        Let's talk<br/>
+        <span class="accent">operations.</span>
+      </h1>
+      <p class="page-hero-subtitle">
+        Tell us about your business and what you're trying to fix - or book straight into the calendar below. We'll be in touch within one business day.
+      </p>
+      <div class="page-hero-ctas">
+        <a href="/assessment/" class="btn-hero-primary">
+          Take the Free Assessment
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#calendly" class="btn-hero-secondary">Book a Discovery Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact Form + Sidebar ───────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-body">
+
+        <!-- ── Form ── -->
+        <div class="reveal">
+          <form id="contact-form">
+            <input type="hidden" name="_subject" value="New COREX Enquiry" />
+
+            <!-- Section: Identity -->
+            <div class="form-section">
+              <p class="form-section-title">Your Details</p>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input type="text" name="first_name" class="form-input" placeholder="Jane" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" name="last_name" class="form-input" placeholder="Smith" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Work Email</label>
+                <input type="email" name="email" class="form-input" placeholder="jane@company.com" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Company</label>
+                  <input type="text" name="company" class="form-input" placeholder="Acme Ltd" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone (Optional)</label>
+                  <input type="tel" name="phone" class="form-input" placeholder="+44 7700 000000" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Brief -->
+            <div class="form-section">
+              <p class="form-section-title">What You're Working On</p>
+              <div class="form-group">
+                <label class="form-label">What are you looking to achieve?</label>
+                <select name="topic" class="form-select">
+                  <option value="">Select a topic...</option>
+                  <option>Operational audit &amp; diagnosis</option>
+                  <option>Process automation &amp; integration</option>
+                  <option>AI implementation</option>
+                  <option>CRM &amp; HubSpot implementation</option>
+                  <option>Full operational transformation</option>
+                  <option>Partnership enquiry</option>
+                  <option>Just exploring</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tell us about your business and what you want to fix</label>
+                <textarea name="message" class="form-textarea" style="min-height:180px;" placeholder="What's eating your team's time right now?"></textarea>
+              </div>
+            </div>
+
+            <!-- Section: Source -->
+            <div class="form-section">
+              <p class="form-section-title">How You Found Us</p>
+              <div class="form-group">
+                <label class="form-label">How did you hear about us?</label>
+                <select name="source" class="form-select">
+                  <option value="">Select...</option>
+                  <option>LinkedIn</option>
+                  <option>Google Search</option>
+                  <option>Referral from a colleague</option>
+                  <option>HubSpot Partner Directory</option>
+                  <option>Zapier Partner Directory</option>
+                  <option>Podcast or media</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" id="contact-submit-btn" class="btn-transmit">
+              Send Transmission
+              <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p id="contact-form-status" style="text-align:center; margin-top:14px; font-size:14px; font-weight:300; color:var(--white-35); letter-spacing:0.02em;">
+              We respond to all enquiries within 1 business day.
+            </p>
+
+          </form>
+        </div>
+
+        <!-- ── Sidebar ── -->
+        <div class="contact-sidebar">
+
+          <!-- Live status -->
+          <div class="info-card reveal">
+            <p class="sidebar-label"><span class="live-dot"></span>Currently Taking Enquiries</p>
+            <p class="sidebar-value">Mon–Fri · 9am–6pm IST</p>
+            <p class="sidebar-body">We're actively taking on new clients. Every enquiry is reviewed and replied to within one business day.</p>
+          </div>
+
+          <!-- Response time -->
+          <div class="info-card reveal reveal-delay-1">
+            <p class="sidebar-label">Response Time</p>
+            <p class="sidebar-value">Within 24 Hours</p>
+            <p class="sidebar-body">If we can help, we'll tell you exactly how. If we can't, we'll tell you that too.</p>
+          </div>
+
+          <!-- Location -->
+          <div class="info-card reveal reveal-delay-2">
+            <div class="info-card-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 class="info-card-title">Ireland. Working Globally.</h3>
+            <p class="info-card-body">We work with clients across Ireland, the UK, Europe, and beyond. All engagements delivered remotely or on-site.</p>
+          </div>
+
+          <!-- Assessment CTA -->
+          <div class="info-card reveal reveal-delay-3">
+            <p class="sidebar-label">Not sure where to start?</p>
+            <p class="sidebar-body">Take the free 12-question Operations Assessment and we'll diagnose your situation before we even speak.</p>
+            <a href="/assessment/" class="sidebar-link">
+              Take the Free Assessment
+              <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Calendly ──────────────────────────────────────────── -->
+  <section class="calendly-section">
+    <div class="container">
+
+      <div class="section-header reveal" style="margin-bottom:40px;">
+        <p class="section-label">Or Skip Straight to Booking</p>
+      </div>
+
+      <div class="cal-header reveal">
+        <div>
+          <h2 class="cal-headline">
+            Pick a slot<br/>
+            <span>that works.</span>
+          </h2>
+        </div>
+        <div class="cal-meta">
+          <div class="cal-meta-badge">
+            <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="#22c55e"/></svg>
+            30 min · No obligation
+          </div>
+          <p class="cal-meta-text">We'll listen, ask the right questions, and tell you honestly whether - and how - we can help.</p>
+        </div>
+      </div>
+
+      <div class="calendly-frame reveal">
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/eamonn-corexoperations/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+             style="min-width:320px;height:700px;"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="../shared/site.js"></script>
+  <script>
+    (function () {
+      var form   = document.getElementById('contact-form');
+      var btn    = document.getElementById('contact-submit-btn');
+      var status = document.getElementById('contact-form-status');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        status.textContent = '';
+        // EmailJS sendForm maps each input[name] directly to template variables
+        // Template variables available: {{first_name}}, {{last_name}}, {{email}},
+        //   {{company}}, {{phone}}, {{topic}}, {{message}}, {{source}}
+        loadEmailJS(function () {
+          window.emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACT, form)
+            .then(function () {
+              form.reset();
+              btn.textContent = '✓ Sent - we\'ll be in touch within 24 hours. If it\'s urgent, book directly above.';
+              status.style.color = 'var(--cyan)';
+              status.textContent = '';
+            })
+            .catch(function () {
+              btn.disabled = false;
+              btn.textContent = 'Send Transmission';
+              status.style.color = '#f87171';
+              status.textContent = 'Something went wrong. Email eamonn@corexoperations.com directly.';
+            });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

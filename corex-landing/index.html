@@ -747,6 +747,63 @@
       margin-top: 6px;
     }
 
+    /* ─── Client Carousel ───────────────────────────────── */
+    .section-clients {
+      padding: 56px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .clients-label {
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 36px;
+    }
+
+    .clients-track-outer {
+      position: relative;
+      overflow: hidden;
+      /* fade edges */
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+    }
+
+    .clients-track {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      width: max-content;
+      animation: clients-scroll 28s linear infinite;
+    }
+
+    .clients-track:hover { animation-play-state: paused; }
+
+    @keyframes clients-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .client-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.25s, filter 0.25s;
+      filter: grayscale(1) opacity(0.7);
+    }
+    .client-logo:hover { filter: grayscale(0) opacity(1); }
+
+    .client-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
     /* ─── Process Section ────────────────────────────────── */
     .section-process {
       padding: 100px 0;
@@ -1541,13 +1598,6 @@
     </div>
   </section>
 
-  <!-- ─── Social Proof Strip ───────────────────────────── -->
-  <div class="social-proof-strip">
-    <span class="proof-count">AI-powered operations built for 12+ businesses</span>
-    <span class="proof-sep">·</span>
-    <span class="proof-quote">Cosy Cabins · C11 Recovery · Burrows &amp; Partners · DealDrive · AITON · Mountleader Media · Uplead Digital + more</span>
-  </div>
-
   <!-- ─── Certifications Strip ──────────────────────────── -->
   <section class="cert-strip">
     <div class="container">
@@ -1572,6 +1622,43 @@
             PMI PMP Certified
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Client Logos Carousel ───────────────────────── -->
+  <section class="section-clients">
+    <p class="clients-label">Trusted by growth businesses</p>
+    <div class="clients-track-outer">
+      <div class="clients-track">
+        <!-- Set 1 -->
+        <div class="client-logo"><img src="/corex-landing/assets/c11-recovery-logo.png" alt="C11 Recovery" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/cosy-cabins-logo.png" alt="Cosy Cabins" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/MM_logo_icon_and_text_white_page-0001-removebg-preview.png" alt="Mountleader Media" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/Alpha.avif" alt="Alpha Accelerator" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/Alpha.jpg" alt="Alpha Motivation" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/AITON.webp" alt="AITON" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/APC.png" alt="A Players Club" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/rfm.webp" alt="RFM Digital" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/image.webp" alt="Sales Solutions 4 You" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/tmp473u49o1.webp" alt="Client" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/dp.avif" alt="Client" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/fitover40-logo.png" alt="FitOver40 Man" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/novadrive-logo.avif" alt="NovaDrive" /></div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="client-logo"><img src="/corex-landing/assets/c11-recovery-logo.png" alt="C11 Recovery" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/cosy-cabins-logo.png" alt="Cosy Cabins" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/MM_logo_icon_and_text_white_page-0001-removebg-preview.png" alt="Mountleader Media" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/Alpha.avif" alt="Alpha Accelerator" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/Alpha.jpg" alt="Alpha Motivation" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/AITON.webp" alt="AITON" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/APC.png" alt="A Players Club" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/rfm.webp" alt="RFM Digital" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/image.webp" alt="Sales Solutions 4 You" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/tmp473u49o1.webp" alt="Client" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/dp.avif" alt="Client" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/fitover40-logo.png" alt="FitOver40 Man" /></div>
+        <div class="client-logo"><img src="/corex-landing/assets/novadrive-logo.avif" alt="NovaDrive" /></div>
       </div>
     </div>
   </section>
