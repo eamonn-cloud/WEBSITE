@@ -68,8 +68,18 @@ exports.handler = async (event) => {
       </div>
 
       <h2 style="color: #1a365d; margin-top: 25px; margin-bottom: 10px; font-size: 16px;">Next Steps</h2>
-      <p style="font-size: 14px; line-height: 1.6; color: #4a5568;">
-        A member of the Corex Operations team will review your assessment and reach out with personalized recommendations for your operational transformation.
+      <p style="font-size: 14px; line-height: 1.6; color: #4a5568; margin-bottom: 20px;">
+        A member of the Corex Operations team will review your assessment and reach out with personalized recommendations for your operational transformation. Or, book a call directly to discuss your results:
+      </p>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="https://calendly.com/eamonn-corexoperations/30min?hide_event_type_details=1&hide_gdpr_banner=1" style="display: inline-block; background: #3b82f6; color: white; padding: 12px 32px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
+          Book a 30-Minute Call
+        </a>
+      </div>
+
+      <p style="font-size: 13px; line-height: 1.6; color: #718096; text-align: center;">
+        Choose a time that works for you to discuss your operational transformation roadmap.
       </p>
     `;
 
