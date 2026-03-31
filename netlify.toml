@@ -1,8 +1,0 @@
-[build]
-  base = "corex-operate-strong"
-  command = "npm run build"
-  functions = "netlify/functions"
-  publish = "dist"
-
-[dev]
-  functions = "netlify/functions"
