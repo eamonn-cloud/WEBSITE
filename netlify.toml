@@ -1,5 +1,4 @@
 [build]
-  base = "corex-operate-strong"
-  command = "npm run build"
+  base = "corex-landing"
   functions = "netlify/functions"
-  publish = "dist"
+  publish = "."
