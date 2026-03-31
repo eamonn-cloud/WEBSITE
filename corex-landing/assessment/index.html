@@ -1093,6 +1093,12 @@
     });
 
     document.getElementById('btn-send-report').addEventListener('click', function () {
+      // Validate all questions are answered
+      if (state.answers.some(a => a === null)) {
+        alert('Please answer all questions before submitting.');
+        return;
+      }
+
       const emailEl = document.getElementById('r-email');
       const email = emailEl.value.trim();
       if (!email || !email.includes('@')) {
