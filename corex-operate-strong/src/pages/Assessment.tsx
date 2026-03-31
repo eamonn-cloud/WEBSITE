@@ -528,7 +528,6 @@ export default function Assessment() {
                 </p>
               </CardContent>
             </Card>
-            )}
 
             {/* CTA to Book Call */}
             <Card className="animate-slide-up bg-deep-navy border-0 shadow-xl" style={{ animationDelay: "0.2s" }}>
