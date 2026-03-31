@@ -528,9 +528,6 @@ export default function Assessment() {
                 </p>
               </CardContent>
             </Card>
-                  </p>
-                </CardContent>
-              </Card>
             )}
 
             {/* CTA to Book Call */}
