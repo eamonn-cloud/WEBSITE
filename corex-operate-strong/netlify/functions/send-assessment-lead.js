@@ -67,6 +67,7 @@ exports.handler = async (event) => {
         <p style="margin: 10px 0 0 0; font-size: 14px; color: #1e40af;"><strong>Maturity Tier:</strong> Tier ${lead.tier}: ${escapeHtml(lead.tierName)}</p>
       </div>
 
+      <h2 style="color: #1a365d; margin-top: 30px; margin-bottom: 15px;">Your Assessment Answers</h2>
       ${detailedAnswersHtml}
 
       <p style="margin-top: 30px; font-size: 14px; color: #718096;">
@@ -112,6 +113,7 @@ exports.handler = async (event) => {
     // Send to Slack
     if (SLACK_WEBHOOK_URL) {
       try {
+        console.log("SLACK_WEBHOOK_URL is set, attempting to send Slack message");
         const slackMessage = {
           text: `New Assessment Submission: ${escapeHtml(lead.fullName)}`,
           blocks: [
@@ -157,17 +159,28 @@ exports.handler = async (event) => {
           ],
         };
 
-        await fetch(SLACK_WEBHOOK_URL, {
+        const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(slackMessage),
         });
-        console.log("Slack notification sent successfully");
+
+        console.log("Slack response status:", slackResponse.status);
+        const slackText = await slackResponse.text();
+        console.log("Slack response body:", slackText);
+
+        if (slackResponse.ok) {
+          console.log("Slack notification sent successfully");
+        } else {
+          console.error("Slack webhook returned non-200 status:", slackResponse.status, slackText);
+        }
       } catch (slackError) {
         console.error("Slack error (non-fatal):", slackError);
       }
+    } else {
+      console.warn("SLACK_WEBHOOK_URL is not set");
     }
 
     return {

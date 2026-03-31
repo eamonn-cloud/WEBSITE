@@ -339,8 +339,11 @@ export default function Assessment() {
     }
   };
 
-  const handleReportRequest = () => {
+  const handleReportRequest = async () => {
+    setIsSubmitting(true);
+    await sendLeadToBackend(totalScore, getTier(totalScore), answers);
     setReportRequested(true);
+    setIsSubmitting(false);
   };
 
   // Lead Capture Gate
