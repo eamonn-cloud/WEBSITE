@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo to White Processor</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0a0a0f;
+    color: #fff;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 32px;
+  }
+
+  #dropzone {
+    border: 1.5px dashed rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 32px;
+    background: rgba(255,255,255,0.02);
+  }
+  #dropzone.drag-over {
+    border-color: rgba(100,180,255,0.6);
+    background: rgba(100,180,255,0.05);
+  }
+  #dropzone .drop-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.5; }
+  #dropzone p { font-size: 14px; color: rgba(255,255,255,0.4); }
+  #dropzone strong { color: rgba(255,255,255,0.8); }
+  #file-input { display: none; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .control-group label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .control-group input[type=range] {
+    width: 160px;
+    accent-color: #4aa0ff;
+  }
+  .control-group .val {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-primary { background: #4aa0ff; color: #000; }
+  .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .logo-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .logo-card .preview {
+    /* checkered background to show transparency */
+    background:
+      repeating-conic-gradient(rgba(255,255,255,0.06) 0% 25%, transparent 0% 50%)
+      0 0 / 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100px;
+  }
+  .logo-card .preview canvas {
+    max-width: 140px;
+    max-height: 80px;
+    object-fit: contain;
+  }
+  .logo-card .dark-preview {
+    background: #0d1117;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    min-height: 72px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo-card .dark-preview canvas {
+    max-width: 140px;
+    max-height: 60px;
+    object-fit: contain;
+  }
+  .logo-card .card-footer {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo-card .filename {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+  }
+  .logo-card .dl-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4aa0ff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .logo-card .dl-btn:hover { background: rgba(74,160,255,0.12); }
+
+  #dl-all-wrap {
+    margin-top: 28px;
+    display: none;
+    gap: 12px;
+  }
+  #dl-all-wrap.visible { display: flex; }
+
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: rgba(255,255,255,0.2);
+    font-size: 14px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Logo Processor</h1>
+<p class="subtitle">Drop your logos in. Strips backgrounds, outputs clean white PNGs ready for dark sites.</p>
+
+<div id="dropzone">
+  <div class="drop-icon">⬆</div>
+  <p><strong>Drop logos here</strong> or click to browse</p>
+  <p style="margin-top:6px; font-size:12px;">PNG, JPG, WEBP, AVIF, SVG — any format</p>
+</div>
+<input type="file" id="file-input" multiple accept="image/*">
+
+<div class="controls" id="controls" style="display:none;">
+  <div class="control-group">
+    <label>BG Threshold <span class="val" id="thresh-val">220</span></label>
+    <input type="range" id="thresh" min="100" max="254" value="220">
+  </div>
+  <div class="control-group">
+    <label>Output colour</label>
+    <div style="display:flex; gap:8px; margin-top:2px;">
+      <button class="btn btn-primary" id="btn-white" style="font-size:12px; padding:6px 14px;">White</button>
+      <button class="btn btn-secondary" id="btn-color" style="font-size:12px; padding:6px 14px;">Keep colour</button>
+    </div>
+  </div>
+  <button class="btn btn-secondary" id="reprocess-btn" style="margin-top:18px;">Reprocess all</button>
+</div>
+
+<p class="section-label" id="results-label" style="display:none;">Results — transparent background, white fill</p>
+
+<div id="grid"><div class="empty">Upload logos above to get started</div></div>
+
+<div id="dl-all-wrap">
+  <button class="btn btn-primary" id="dl-all-btn">Download all as ZIP</button>
+  <button class="btn btn-secondary" id="clear-btn">Clear all</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('file-input');
+const grid = document.getElementById('grid');
+const threshSlider = document.getElementById('thresh');
+const threshVal = document.getElementById('thresh-val');
+const dlAllWrap = document.getElementById('dl-all-wrap');
+const dlAllBtn = document.getElementById('dl-all-btn');
+const clearBtn = document.getElementById('clear-btn');
+const controls = document.getElementById('controls');
+const resultsLabel = document.getElementById('results-label');
+const reprocessBtn = document.getElementById('reprocess-btn');
+const btnWhite = document.getElementById('btn-white');
+const btnColor = document.getElementById('btn-color');
+
+let files = [];
+let outputWhite = true;
+
+// Dropzone
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('drag-over');
+  addFiles(Array.from(e.dataTransfer.files));
+});
+fileInput.addEventListener('change', () => addFiles(Array.from(fileInput.files)));
+
+function addFiles(newFiles) {
+  const imgs = newFiles.filter(f => f.type.startsWith('image/') || f.name.endsWith('.avif') || f.name.endsWith('.webp'));
+  files = [...files, ...imgs];
+  renderAll();
+}
+
+threshSlider.addEventListener('input', () => {
+  threshVal.textContent = threshSlider.value;
+});
+
+reprocessBtn.addEventListener('click', renderAll);
+
+btnWhite.addEventListener('click', () => {
+  outputWhite = true;
+  btnWhite.className = 'btn btn-primary';
+  btnColor.className = 'btn btn-secondary';
+  renderAll();
+});
+btnColor.addEventListener('click', () => {
+  outputWhite = false;
+  btnWhite.className = 'btn btn-secondary';
+  btnColor.className = 'btn btn-primary';
+  renderAll();
+});
+
+clearBtn.addEventListener('click', () => {
+  files = [];
+  grid.innerHTML = '<div class="empty">Upload logos above to get started</div>';
+  dlAllWrap.classList.remove('visible');
+  controls.style.display = 'none';
+  resultsLabel.style.display = 'none';
+});
+
+function renderAll() {
+  if (!files.length) return;
+  grid.innerHTML = '';
+  controls.style.display = 'flex';
+  resultsLabel.style.display = 'block';
+  resultsLabel.textContent = outputWhite
+    ? 'Results — transparent background, white fill'
+    : 'Results — transparent background, original colours';
+  files.forEach((f, i) => processFile(f, i));
+  dlAllWrap.classList.add('visible');
+}
+
+function processFile(file, index) {
+  const card = document.createElement('div');
+  card.className = 'logo-card';
+  card.dataset.index = index;
+
+  const preview = document.createElement('div');
+  preview.className = 'preview';
+  const darkPreview = document.createElement('div');
+  darkPreview.className = 'dark-preview';
+  const footer = document.createElement('div');
+  footer.className = 'card-footer';
+
+  const name = document.createElement('span');
+  name.className = 'filename';
+  // strip to base name without extension, add .png
+  const baseName = file.name.replace(/\.[^.]+$/, '') + '-white.png';
+  name.textContent = file.name;
+  name.title = file.name;
+
+  const dlBtn = document.createElement('button');
+  dlBtn.className = 'dl-btn';
+  dlBtn.textContent = 'Download';
+
+  footer.appendChild(name);
+  footer.appendChild(dlBtn);
+  card.appendChild(preview);
+  card.appendChild(darkPreview);
+  card.appendChild(footer);
+  grid.appendChild(card);
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const threshold = parseInt(threshSlider.value);
+      const processed = processImage(img, threshold, outputWhite);
+
+      // Main preview (checkered — shows transparency)
+      const c1 = document.createElement('canvas');
+      c1.width = processed.width;
+      c1.height = processed.height;
+      c1.getContext('2d').putImageData(processed, 0, 0);
+      scaleCanvas(c1, 140, 80);
+      preview.appendChild(c1);
+
+      // Dark preview (how it looks on dark bg)
+      const c2 = document.createElement('canvas');
+      c2.width = processed.width;
+      c2.height = processed.height;
+      c2.getContext('2d').putImageData(processed, 0, 0);
+      scaleCanvas(c2, 140, 60);
+      darkPreview.appendChild(c2);
+
+      dlBtn.addEventListener('click', () => downloadCanvas(c1, baseName));
+      card.dataset.canvas = 'ready';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function processImage(img, threshold, makeWhite) {
+  const canvas = document.createElement('canvas');
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imageData.data;
+
+  // Step 1: flood fill from all 4 corners to find background
+  const w = canvas.width, h = canvas.height;
+  const bgMask = new Uint8Array(w * h); // 1 = background
+  const corners = [0, w - 1, (h - 1) * w, (h - 1) * w + w - 1];
+
+  // sample background colour from corners
+  let bgR = 0, bgG = 0, bgB = 0, count = 0;
+  for (const ci of corners) {
+    bgR += data[ci * 4];
+    bgG += data[ci * 4 + 1];
+    bgB += data[ci * 4 + 2];
+    count++;
+  }
+  bgR = Math.round(bgR / count);
+  bgG = Math.round(bgG / count);
+  bgB = Math.round(bgB / count);
+
+  const isBgLike = (r, g, b) => {
+    // Check if pixel is close to the detected background OR close to pure white
+    const distToBg = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB);
+    const isWhite = r > threshold && g > threshold && b > threshold;
+    return distToBg < 60 || isWhite;
+  };
+
+  // Flood fill from edges
+  const stack = [];
+  for (const ci of corners) stack.push(ci);
+
+  // Also seed from all edge pixels
+  for (let x = 0; x < w; x++) { stack.push(x); stack.push((h - 1) * w + x); }
+  for (let y = 0; y < h; y++) { stack.push(y * w); stack.push(y * w + w - 1); }
+
+  while (stack.length) {
+    const idx = stack.pop();
+    if (idx < 0 || idx >= w * h || bgMask[idx]) continue;
+    const r = data[idx * 4], g = data[idx * 4 + 1], b = data[idx * 4 + 2];
+    if (!isBgLike(r, g, b)) continue;
+    bgMask[idx] = 1;
+    stack.push(idx - 1, idx + 1, idx - w, idx + w);
+  }
+
+  // Step 2: apply - make bg transparent, fill remaining with white
+  for (let i = 0; i < w * h; i++) {
+    const di = i * 4;
+    if (bgMask[i]) {
+      // background — make transparent
+      data[di] = 255;
+      data[di + 1] = 255;
+      data[di + 2] = 255;
+      data[di + 3] = 0;
+    } else {
+      if (makeWhite) {
+        // logo pixel — make white, keep original alpha
+        const a = data[di + 3];
+        data[di] = 255;
+        data[di + 1] = 255;
+        data[di + 2] = 255;
+        data[di + 3] = a > 0 ? 255 : 0;
+      }
+      // else: keep original colour, just remove bg
+    }
+  }
+
+  return imageData;
+}
+
+function scaleCanvas(canvas, maxW, maxH) {
+  const ratio = Math.min(maxW / canvas.width, maxH / canvas.height, 1);
+  canvas.style.width = Math.round(canvas.width * ratio) + 'px';
+  canvas.style.height = Math.round(canvas.height * ratio) + 'px';
+}
+
+function downloadCanvas(canvas, filename) {
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+
+dlAllBtn.addEventListener('click', async () => {
+  dlAllBtn.textContent = 'Preparing ZIP...';
+  dlAllBtn.disabled = true;
+
+  const zip = new JSZip();
+  const canvases = grid.querySelectorAll('.logo-card');
+  const promises = [];
+
+  canvases.forEach((card, i) => {
+    const c = card.querySelector('.preview canvas');
+    if (!c) return;
+    const file = files[i];
+    const baseName = file.name.replace(/\.[^.]+$/, '') + '-white.png';
+    promises.push(new Promise(resolve => {
+      c.toBlob(blob => {
+        blob.arrayBuffer().then(buf => {
+          zip.file(baseName, buf);
+          resolve();
+        });
+      }, 'image/png');
+    }));
+  });
+
+  await Promise.all(promises);
+  const content = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(content);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'logos-white.zip';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  dlAllBtn.textContent = 'Download all as ZIP';
+  dlAllBtn.disabled = false;
+});
+</script>
+</body>
+</html>
