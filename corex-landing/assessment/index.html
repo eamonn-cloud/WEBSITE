@@ -1113,7 +1113,7 @@
         const q = QUESTIONS[index];
         return {
           questionId: index.toString(),
-          section: `Section ${q.section}`,
+          section: SECTIONS[q.section],
           question: q.text,
           selectedValue: selectedValue,
           selectedAnswer: selectedValue !== null ? q.options[selectedValue] : '',
