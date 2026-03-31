@@ -119,6 +119,9 @@ exports.handler = async (event) => {
     console.log("Internal email sent:", internalEmail);
 
     // Send to Slack
+    console.log("DEBUG: SLACK_WEBHOOK_URL env var exists:", !!SLACK_WEBHOOK_URL);
+    console.log("DEBUG: SLACK_WEBHOOK_URL value (first 50 chars):", SLACK_WEBHOOK_URL ? SLACK_WEBHOOK_URL.substring(0, 50) : "NOT SET");
+
     if (SLACK_WEBHOOK_URL) {
       try {
         console.log("SLACK_WEBHOOK_URL is set, attempting to send Slack message");
@@ -167,6 +170,7 @@ exports.handler = async (event) => {
           ],
         };
 
+        console.log("DEBUG: About to fetch Slack webhook, message payload size:", JSON.stringify(slackMessage).length);
         const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
           method: "POST",
           headers: {
@@ -185,7 +189,7 @@ exports.handler = async (event) => {
           console.error("Slack webhook returned non-200 status:", slackResponse.status, slackText);
         }
       } catch (slackError) {
-        console.error("Slack error (non-fatal):", slackError);
+        console.error("Slack error (non-fatal):", slackError.message, slackError.stack);
       }
     } else {
       console.warn("SLACK_WEBHOOK_URL is not set");
