@@ -2,3 +2,4 @@
   base = "corex-landing"
   functions = "netlify/functions"
   publish = "."
+  command = "echo 'Static site - no build needed'"
