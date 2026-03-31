@@ -1045,6 +1045,48 @@
       }
     });
 
+    /* ─── Auto-send report ─────────────────────────────────── */
+    function autoSendReport(score, tier) {
+      // Build answers array with section info
+      const answers = state.answers.map((selectedValue, index) => {
+        const q = QUESTIONS[index];
+        return {
+          questionId: index.toString(),
+          section: SECTIONS[q.section],
+          question: q.text,
+          selectedValue: selectedValue,
+          selectedAnswer: selectedValue !== null ? q.options[selectedValue] : '',
+        };
+      });
+
+      // Payload for Netlify Function
+      const payload = {
+        fullName: state.name,
+        email: state.email,
+        mobile: '',
+        score: score,
+        tier: tier.name.charAt(0),
+        tierName: tier.name,
+        answers: answers,
+      };
+
+      // Send to Netlify Function
+      fetch('/.netlify/functions/send-assessment-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            console.log('Report auto-sent successfully');
+          }
+        })
+        .catch(err => {
+          console.error('Error auto-sending report:', err);
+        });
+    }
+
     /* ─── Results ───────────────────────────────────────── */
     function showResults() {
       const score = state.answers.reduce((sum, a) => sum + (a !== null ? a : 0), 0);
@@ -1082,6 +1124,11 @@
       document.getElementById('report-email-form').classList.remove('show');
 
       showScreen('screen-results');
+
+      // Auto-send report after a short delay
+      setTimeout(() => {
+        autoSendReport(score, tier);
+      }, 500);
     }
 
     /* ─── Report button ─────────────────────────────────── */
