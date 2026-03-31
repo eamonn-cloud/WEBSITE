@@ -7,6 +7,9 @@
     "build": "echo 'Static site - no build needed'",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "resend": "^3.0.0"
+  },
   "devDependencies": {
     "vite": "^5.4.0"
   }
