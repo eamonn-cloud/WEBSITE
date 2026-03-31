@@ -339,12 +339,6 @@ export default function Assessment() {
     }
   };
 
-  const handleReportRequest = async () => {
-    setIsSubmitting(true);
-    await sendLeadToBackend(totalScore, getTier(totalScore), answers);
-    setReportRequested(true);
-    setIsSubmitting(false);
-  };
 
   // Lead Capture Gate
   if (!leadCaptured) {
@@ -524,32 +518,16 @@ export default function Assessment() {
               </CardContent>
             </Card>
 
-            {/* Report Request */}
-            {!reportRequested ? (
-              <Card className="mb-8 animate-slide-up bg-light-blue border border-primary-blue/30 shadow-lg" style={{ animationDelay: "0.1s" }}>
-                <CardHeader>
-                  <CardTitle className="text-deep-navy flex items-center gap-2">
-                    <Mail className="h-5 w-5 text-primary-blue" />
-                    Get Your Full Report
-                  </CardTitle>
-                  <CardDescription>
-                    We'll send a detailed breakdown with actionable recommendations to {leadInfo.email}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button onClick={handleReportRequest} variant="cta" size="lg" className="w-full">
-                    Send My Report
-                    <ArrowRight className="h-5 w-5" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card className="mb-8 animate-scale-in bg-light-blue border border-primary-blue/30 shadow-lg">
-                <CardContent className="pt-6 text-center">
-                  <CheckCircle className="h-12 w-12 text-primary-blue mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-deep-navy mb-2">Report Requested!</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Check your inbox at {leadInfo.email} for your detailed Operational Maturity Report.
+            {/* Report Confirmation */}
+            <Card className="mb-8 animate-scale-in bg-light-blue border border-primary-blue/30 shadow-lg">
+              <CardContent className="pt-6 text-center">
+                <CheckCircle className="h-12 w-12 text-primary-blue mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-deep-navy mb-2">Assessment Complete!</h3>
+                <p className="text-muted-foreground mb-4">
+                  Your results have been sent to {leadInfo.email}. A member of our team will reach out shortly with personalized recommendations.
+                </p>
+              </CardContent>
+            </Card>
                   </p>
                 </CardContent>
               </Card>

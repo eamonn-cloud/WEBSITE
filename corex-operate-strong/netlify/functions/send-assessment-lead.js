@@ -55,11 +55,11 @@ exports.handler = async (event) => {
       )
       .join("");
 
-    // Email to customer with their report
+    // Email to customer with simple summary
     const customerEmailHtml = `
       <h1 style="color: #1a365d; margin-bottom: 20px;">Your Operational Maturity Assessment Results</h1>
       <p style="font-size: 16px; line-height: 1.6; color: #4a5568; margin-bottom: 20px;">
-        Thank you for completing your assessment. Here are your results:
+        Thank you for completing your assessment. Here's your maturity score and next steps.
       </p>
 
       <div style="background: #f0f4ff; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0; border-radius: 4px;">
@@ -67,11 +67,9 @@ exports.handler = async (event) => {
         <p style="margin: 10px 0 0 0; font-size: 14px; color: #1e40af;"><strong>Maturity Tier:</strong> Tier ${lead.tier}: ${escapeHtml(lead.tierName)}</p>
       </div>
 
-      <h2 style="color: #1a365d; margin-top: 30px; margin-bottom: 15px;">Your Assessment Answers</h2>
-      ${detailedAnswersHtml}
-
-      <p style="margin-top: 30px; font-size: 14px; color: #718096;">
-        A detailed analysis will be sent separately by the Corex Operations team.
+      <h2 style="color: #1a365d; margin-top: 25px; margin-bottom: 10px; font-size: 16px;">Next Steps</h2>
+      <p style="font-size: 14px; line-height: 1.6; color: #4a5568;">
+        A member of the Corex Operations team will review your assessment and reach out with personalized recommendations for your operational transformation.
       </p>
     `;
 
